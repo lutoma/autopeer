@@ -1,6 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render
-from formtools.wizard.views import SessionWizardView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
