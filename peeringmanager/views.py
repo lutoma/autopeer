@@ -124,10 +124,8 @@ class CreatePeeringView(CreateView):
 		ssh = paramiko.SSHClient()
 		ssh.load_system_host_keys()
 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		key = paramiko.ed25519key.Ed25519Key.from_private_key_file(filename = '/tmp/autopeer.key')
-
 		ssh.connect(form.instance.router.host_external, username = 'autopeer', banner_timeout = 5,
-			look_for_keys = False, allow_agent = False, pkey = key)
+			look_for_keys = True, allow_agent = False, pkey = key)
 
 		(stdin, stdout, stderr) = ssh.exec_command('/usr/bin/sudo /usr/local/bin/autopeer-modify')
 		stdin.write(data + '\n')
