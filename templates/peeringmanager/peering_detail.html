@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='row'>
+	<div class='col-lg-12'>
+		<h1>Peering details</h1>
+		<p><a href='/'>Back to peering list</a></p>
+	</div>
+
+
+	<div class='col-lg-6' style='margin-top: 1rem;'>
+		<table class='table'>
+			<tbody>
+				<tr>
+					<th scope='row'>Location</th>
+					<td>{{ object.router.location }}</td>
+				</tr>
+				<tr>
+					<th scope='row'>ASN</th>
+					<td>64719</td>
+				</tr>
+				<tr>
+					<th scope='row'>Wireguard endpoint</th>
+					<td>{{ object.router.host_external }}:{{ object.wg_port }}</td>
+				</tr>
+				<tr>
+					<th scope='row'>Internal IP</th>
+					<td>{{ object.router.ip_internal }}</td>
+				</tr>
+				<tr>
+					<th scope='row'>Bandwidth</th>
+					<td>{{ object.get_bandwidth_community_display }}</td>
+				</tr>
+				<tr>
+					<th scope='row'>BGP communities</th>
+					<td>64511:2 64511:{{ object.bandwidth_community }} 64511:34</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class='col-lg-6' style='margin-top: 1rem;'>
+		<table class='table'>
+			<tbody>
+				<tr>
+					<th scope='row'>Wireguard pubkey</th>
+					<td><code>{{ object.wg_pubkey }}</code></td>
+				</tr>
+				<tr>
+					<th scope='row'>Your wireguard pubkey</th>
+					<td><code>{{ object.wg_peer_pubkey }}</code></td>
+				</tr>
+				<tr>
+					<th scope='row'>Your ASN</th>
+					<td>{{ object.asn }}</td>
+				</tr>
+				<tr>
+					<th scope='row'>Your endpoint</th>
+					<td>{{ object.endpoint }}</td>
+				</tr>
+				<tr>
+					<th scope='row'>Your internal IP</th>
+					<td>{{ object.endpoint_internal }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class='col-lg-12' style='margin-top: 1rem;'>
+		<h2>Example configurations</h2>
+	</div>
+	<div class='col-lg-6' style='margin-top: .6rem;'>
+		<h3>Wireguard</h3>
+		<code>
+			[Interface]<br />
+			ListenPort = <em>replace me</em><br />
+			PrivateKey = <em>replace me</em><br />
+			<br />
+			[Peer]<br />
+			Endpoint = {{ object.router.host_external }}:{{ object.wg_port }}<br />
+			PublicKey = {{ object.wg_pubkey }}<br />
+			AllowedIPs = 0.0.0.0/0,::/0
+		</code>
+	</div>
+	<div class='col-lg-6' style='margin-top: .6rem;'>
+		<h3>Bird</h3>
+		<code>
+			protocol bgp lutoma from dn42_peers {<br />
+			&nbsp;&nbsp;neighbor {{ object.router.ip_internal }} as 64719;<br />
+			&nbsp;&nbsp;description "lutoma";<br />
+			&nbsp;&nbsp;# If you have BGP communities set up:<br />
+			&nbsp;&nbsp;#import where dn42_import_filter(2,{{ object.bandwidth_community }},34);<br />
+			&nbsp;&nbsp;#export where dn42_export_filter(2,{{ object.bandwidth_community }},34);<br />
+			};
+		</code>
+	</div>
+	<div class='col-lg-6' style='margin-top: .6rem;'>
+		<h3>interfaces.conf (Debian, Ubuntu, …)</h3>
+		<code>
+auto wg.lutoma<br />
+iface wg.lutoma inet static<br />
+&nbsp;&nbsp;&nbsp;&nbsp;address {{ object.endpoint_internal }}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;pointopoint {{ object.router.ip_internal }}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;pre-up ip link add $IFACE type wireguard<br />
+&nbsp;&nbsp;&nbsp;&nbsp;pre-up wg setconf $IFACE /etc/wireguard/$IFACE.conf<br />
+&nbsp;&nbsp;&nbsp;&nbsp;post-down ip link del $IFACE
+		</code>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,5 @@
+Django==1.11.6
+django-bootstrap4==0.0.4
+pythonwhois==2.4.3
+requests==2.18.4
+paramiko==2.3.1

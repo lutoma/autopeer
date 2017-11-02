@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class='row'>
+	<div class='col-lg-6'>
+		<h1>Create peering</h1>
+
+		<form method='POST'>
+			{% csrf_token %}
+			{% bootstrap_form form %}
+			<input type='submit' class='btn btn-primary' value='Create peering' />
+		</form>
+	</div>
+</div>
+{% endblock %}

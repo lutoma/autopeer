@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+
+{% block title %}{% trans 'Log in' %}{% endblock %}
+{% block content %}
+
+<div class='row justify-content-center'>
+	<div class='col-lg-6'>
+		<h1>Login</h1>
+		<p>You can log in using your MNT object from the dn42 registry (e.g. LUTOMA-MNT) and the associated password in the <code>sha512-pw</code> field.</p>
+
+		<form method='post' action=''>
+			{% csrf_token %}
+			{% bootstrap_form form %}
+			<input type='submit' value='{% trans 'Log in' %}' class='btn btn-primary' />
+			<input type='hidden' name='next' value='{{ next }}' />
+		</form>
+	</div>
+</div>
+{% endblock %}
