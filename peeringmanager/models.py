@@ -36,7 +36,7 @@ class Peering(models.Model):
 	)
 
 	owner = models.ForeignKey(User, verbose_name = _('Owner'))
-	asn = models.IntegerField(verbose_name = _('AS Number'), help_text = _('Your MNTNER object must be listed as mnt-by for the AS'))
+	asn = models.BigIntegerField(verbose_name = _('AS Number'), help_text = _('Your MNTNER object must be listed as mnt-by for the AS'))
 	vpn_type = models.CharField(max_length = 50, choices = VPN_CHOICES, verbose_name = _('VPN type'), default = 'wireguard', help_text = _('Peering is also possible using OpenVPN/GRE/…, but only with manual setup for now.'))
 	endpoint = models.CharField(max_length = 200, verbose_name = _('Wireguard endpoint'), help_text = _('Hostname/IP and port, e.g. example.org:1234, 127.0.0.1:1234, [::1]:1234'))
 	endpoint_internal = models.GenericIPAddressField(protocol='IPv4', verbose_name = _('Internal router IP'), help_text = _('The routers IP within dn42. This will be used for the BGP session'))
