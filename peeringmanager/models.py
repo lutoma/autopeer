@@ -42,6 +42,7 @@ class Peering(models.Model):
 	endpoint_internal = models.GenericIPAddressField(protocol='IPv4', verbose_name = _('Internal router IP'), help_text = _('The routers IP within dn42. This will be used for the BGP session'))
 	router = models.ForeignKey(Router, verbose_name = _('Router'))
 	bandwidth_community = models.IntegerField(choices = BANDWIDTH_CHOICES, default = 24, verbose_name = _('Link bandwidth'), help_text = _('Used to set <a href=\'https://wiki.dn42/howto/Bird-communities\'>BGP communities</a>'))
+	name = models.CharField(max_length = 25, verbose_name = _('Peering name'), help_text = _('Used for the interface name (wg.name) and bird peering name etc.'))
 
 	wg_privkey = models.CharField(max_length = 150, verbose_name = _('Wireguard private key'))
 	wg_pubkey = models.CharField(max_length = 150, verbose_name = _('Wireguard public key'))

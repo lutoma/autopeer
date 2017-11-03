@@ -104,6 +104,7 @@ class CreatePeeringView(CreateView):
 
 	def form_valid(self, form):
 		form.instance.owner = self.request.user
+		form.instance.name = 'as{}'.format(form.instance.asn)
 
 		with Popen(["wg", "genkey"], stdout=PIPE) as proc:
 			privkey = proc.stdout.read()
@@ -117,7 +118,7 @@ class CreatePeeringView(CreateView):
 		form.instance.wg_port = form.instance.router.wg_last_port
 		form.instance.router.save()
 
-		fields = ['asn', 'endpoint', 'endpoint_internal', 'bandwidth_community', 'wg_privkey', 'wg_peer_pubkey', 'wg_port']
+		fields = ['asn', 'endpoint', 'endpoint_internal', 'bandwidth_community', 'wg_privkey', 'wg_peer_pubkey', 'wg_port', 'name']
 		data = map(lambda c: (c, getattr(form.instance, c)), fields)
 		data = json.dumps(dict(data))
 
