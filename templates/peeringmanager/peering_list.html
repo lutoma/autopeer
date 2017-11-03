@@ -30,7 +30,8 @@
 						<td>{{ peering.endpoint_internal }}</td>
 						<td>{{ peering.get_vpn_type_display }}</td>
 						<td>
-							<a href='/peerings/{{ peering.id }}'>Details</a><!--<br />
+							<a href='/peerings/{{ peering.id }}'>Details</a><br />
+							<a href='https://stats.dn42.lutoma.org/detail.php?p=interface&pi=wg.as{{ peering.asn }}&t=if_octets&h={{ peering.router.host_internal }}&s=86400' target='_blank'>Traffic stats</a><!--<br />
 							<a href='https://lg.lutoma.dn42/alice/routeservers/2/protocols/as{{ peering.asn }}/routes'>Routes</a>-->
 						</td>
 					</tr>
