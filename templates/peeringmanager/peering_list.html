@@ -25,7 +25,10 @@
 				{% for peering in object_list %}
 					<tr>
 						<th scope='row'><a href='/peerings/{{peering.id}}/'>{{ peering.asn }}</a></th>
-						<td>{{ peering.router.location }}</td>
+						<td>
+							{{ peering.router.location }}<br />
+							<small>{{ peering.router.host_internal }}</small>
+						</td>
 						<td>{{ peering.endpoint }}</td>
 						<td>{{ peering.endpoint_internal }}</td>
 						<td>{{ peering.get_vpn_type_display }}</td>
