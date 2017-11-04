@@ -18,6 +18,7 @@
 					<th scope='col'>Router</th>
 					<th scope='col'>Endpoint</th>
 					<th scope='col'>Type</th>
+					<th scope='col'>Routes</th>
 					<th scope='col'>Traffic avg.</th>
 					<th scope='col'></th>
 			</thead>
@@ -36,6 +37,17 @@
 						</td>
 						<td>{{ peering.get_vpn_type_display }}</td>
 						<td>
+							{% with routes=peering.get_routes %}
+								{% if routes %}
+									{{ routes.imported }} imported<br />
+									{{ routes.preferred }} preferred<br />
+									{{ routes.filtered }} filtered
+								{% else %}
+									<em>Not available</em>
+								{% endif %}
+							{% endwith %}
+						</td>
+						<td>
 							{% with traffic=peering.get_traffic %}
 								{% if traffic %}
 									Receive: {{ traffic.rx }}/s<br />
@@ -47,8 +59,8 @@
 						</td>
 						<td>
 							<a href='/peerings/{{ peering.id }}'>Details</a><br />
-							<a href='https://stats.dn42.lutoma.org/detail.php?p=interface&pi=wg.{{ peering.name }}&t=if_octets&h={{ peering.router.host_internal }}&s=86400' target='_blank'>Traffic stats</a><!--<br />
-							<a href='https://lg.lutoma.dn42/alice/routeservers/2/protocols/{{ peering.name }}/routes'>Routes</a>-->
+							<a href='https://stats.dn42.lutoma.org/detail.php?p=interface&pi=wg.{{ peering.name }}&t=if_octets&h={{ peering.router.host_internal }}&s=86400' target='_blank'>Traffic stats</a><br />
+							<a href='https://lg.dn42.lutoma.org/alice/routeservers/{{ peering.router.lg_id }}/protocols/{{ peering.name }}/routes' target='_blank'>Show routes</a>
 						</td>
 					</tr>
 				{% endfor %}
