@@ -16,6 +16,9 @@ class Router(models.Model):
 	def __str__(self):
 		return self.location
 
+	class Meta:
+		ordering = ['location']
+
 class Peering(models.Model):
 	ROUTER_CHOICES = (
 		('at-grz.gw.lutoma.dn42', 'Graz, Austria'),

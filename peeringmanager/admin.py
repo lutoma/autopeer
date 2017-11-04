@@ -3,8 +3,10 @@ from .models import *
 
 @admin.register(Router)
 class RouterAdmin(admin.ModelAdmin):
-	pass
+	list_display = ['location', 'active', 'host_internal', 'host_external', 'wg_last_port']
+	list_filter = ['active']
 
 @admin.register(Peering)
 class PeeringAdmin(admin.ModelAdmin):
-	pass
+	list_display = ['asn', 'router', 'vpn_type', 'endpoint', 'endpoint_internal']
+	list_filter = ['router', 'vpn_type']
