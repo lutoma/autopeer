@@ -11,6 +11,7 @@ class Router(models.Model):
 	host_internal = models.CharField(max_length = 100, verbose_name = _('Internal host'))
 	ip_internal = models.CharField(max_length = 100, verbose_name = _('Internal IP'))
 	wg_last_port = models.IntegerField(verbose_name = _('Last allocated wireguard port'), default = 42400)
+	active = models.BooleanField(default = True, verbose_name = _('Active'), help_text = _('Users can only create peerings to active routers'))
 
 	def __str__(self):
 		return self.location

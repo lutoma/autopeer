@@ -59,6 +59,7 @@ class PeeringForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		self.user = kwargs.pop('user')
 		super().__init__(*args, **kwargs)
+		self.fields['router'].queryset = Router.objects.filter(active=True)
 
 	def clean_asn(self):
 		mntby = get_whois_field('AS{}'.format(self.cleaned_data['asn']), 'mnt-by')
