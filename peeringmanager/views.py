@@ -1,3 +1,4 @@
+# coding: utf-8
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
@@ -10,36 +11,10 @@ from django import forms
 from subprocess import Popen, PIPE
 from functools import reduce
 from .models import *
-import pythonwhois
+from .whois import get_whois_field
 import paramiko
 import json
 import re
-
-def get_whois_field(obj, field):
-	try:
-		whois_data = pythonwhois.net.get_whois_raw(obj, server='whois.dn42')
-	except:
-		raise ValidationError(_('Could not connect to dn42 whois servers.'))
-
-	if len(whois_data) < 1:
-		return None
-
-	whois_data = whois_data[0].splitlines()
-
-	values = list()
-	for line in whois_data:
-		line = line.strip()
-
-		if not line or line.startswith('%'):
-			continue
-
-		key, value = line.split(':', maxsplit = 1)
-		value = value.strip()
-
-		if key == field:
-			values.append(value)
-
-	return values
 
 @method_decorator(login_required, name='dispatch')
 class PeeringView(ListView):
