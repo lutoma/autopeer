@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block content %}
 <div class='row'>
@@ -16,8 +17,8 @@
 					<th scope='col'>ASN</th>
 					<th scope='col'>Router</th>
 					<th scope='col'>Endpoint</th>
-					<th scope='col'>Internal endpoint</th>
 					<th scope='col'>Type</th>
+					<th scope='col'>Traffic avg.</th>
 					<th scope='col'></th>
 			</thead>
 
@@ -29,10 +30,21 @@
 							{{ peering.router.location }}<br />
 							<small>{{ peering.router.host_internal }}</small>
 						</td>
-						<td>{{ peering.endpoint }}</td>
-						<td>{{ peering.endpoint_internal }}</td>
+						<td>
+							{{ peering.endpoint }}<br />
+							<small>{{ peering.endpoint_internal }}
+						</td>
 						<td>{{ peering.get_vpn_type_display }}</td>
-						<td></td>
+						<td>
+							{% with traffic=peering.get_traffic %}
+								{% if traffic %}
+									Receive: {{ traffic.rx }}/s<br />
+									Transmit: {{ traffic.tx }}/s<br />
+								{% else %}
+									<em>Not available</em>
+								{% endif %}
+							{% endwith %}
+						</td>
 						<td>
 							<a href='/peerings/{{ peering.id }}'>Details</a><br />
 							<a href='https://stats.dn42.lutoma.org/detail.php?p=interface&pi=wg.{{ peering.name }}&t=if_octets&h={{ peering.router.host_internal }}&s=86400' target='_blank'>Traffic stats</a><!--<br />

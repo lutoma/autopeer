@@ -3,7 +3,9 @@
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from hurry.filesize import size
 from django.db import models
+import rrdtool
 
 class Router(models.Model):
 	location = models.CharField(max_length = 100, verbose_name = _('Location'))
@@ -52,6 +54,25 @@ class Peering(models.Model):
 	wg_pubkey = models.CharField(max_length = 150, verbose_name = _('Wireguard public key'))
 	wg_peer_pubkey = models.CharField(max_length = 150, verbose_name = _('Wireguard public key'), help_text = _('See <a href=\'https://www.wireguard.com/quickstart/#key-generation\'>Wireguard manual</a> on how to generate the keys'))
 	wg_port = models.IntegerField(verbose_name = _('Wireguard port'))
+
+	def get_traffic(self):
+		rrd = '/var/lib/collectd/rrd/{}/interface-wg.{}/if_octets.rrd'.format(self.router.host_internal, self.name)
+		try:
+			data = rrdtool.graphv('-',
+				'DEF:tx={}:tx:AVERAGE'.format(rrd),
+				'DEF:rx={}:rx:AVERAGE'.format(rrd),
+				'VDEF:txa=tx,AVERAGE',
+				'VDEF:rxa=rx,AVERAGE',
+				'PRINT:txa:%lf',
+				'PRINT:rxa:%lf')
+
+			return {
+				'tx': size(float(data['print[0]'])),
+				'rx': size(float(data['print[1]'])),
+			}
+			return data
+		except:
+			return None
 
 	def get_absolute_url(self):
 		return '/peerings/{}/'.format(self.id)
