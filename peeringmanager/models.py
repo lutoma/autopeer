@@ -98,6 +98,12 @@ class Peering(models.Model):
 		return 'Peering with AS{} at {}'.format(self.asn, self.router)
 
 	class Meta:
-		unique_together = [('asn', 'router'), ('router', 'wg_port'), ('endpoint_internal', 'router')]
+		unique_together = [
+			('router', 'asn'),
+			('router', 'wg_port'),
+			('router', 'endpoint_internal'),
+			('router', 'name'),
+		]
+
 		verbose_name = _('Peering')
 		verbose_name_plural = _('Peerings')
