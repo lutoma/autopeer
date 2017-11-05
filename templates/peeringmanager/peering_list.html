@@ -58,9 +58,7 @@
 							{% endwith %}
 						</td>
 						<td>
-							<a href='/peerings/{{ peering.id }}'>Details</a><br />
-							<a href='https://stats.dn42.lutoma.org/detail.php?p=interface&pi=wg.{{ peering.name }}&t=if_octets&h={{ peering.router.host_internal }}&s=86400' target='_blank'>Traffic stats</a><br />
-							<a href='https://lg.dn42.lutoma.org/alice/routeservers/{{ peering.router.lg_id }}/protocols/{{ peering.name }}/routes' target='_blank'>Show routes</a>
+							<a class='btn btn-secondary' href='/peerings/{{ peering.id }}/'>Details</a>
 						</td>
 					</tr>
 				{% endfor %}

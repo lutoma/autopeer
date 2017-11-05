@@ -4,12 +4,23 @@
 {% block content %}
 <div class='row'>
 	<div class='col-lg-6'>
-		<h1>Create peering</h1>
+		{% if request.resolver_match.url_name == 'peerings-edit' %}
+			<h1>Edit peering with {{ peering.endpoint }}</h1>
+			<p><a href='/peerings/{{ peering.id }}/'>Back to peering details</a></p>
+		{% else %}
+			<h1>Create peering</h1>
+			<p><a href='/'>Back to peering list</a></p>
+		{% endif %}
 
 		<form method='POST'>
 			{% csrf_token %}
 			{% bootstrap_form form %}
-			<input type='submit' class='btn btn-primary' value='Create peering' />
+
+			{% if request.resolver_match.url_name == 'peerings-edit' %}
+				<input type='submit' class='btn btn-primary' value='Modify peering' />
+			{% else %}
+				<input type='submit' class='btn btn-primary' value='Create peering' />
+			{% endif %}
 		</form>
 	</div>
 </div>

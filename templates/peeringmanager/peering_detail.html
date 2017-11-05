@@ -2,11 +2,15 @@
 
 {% block content %}
 <div class='row'>
-	<div class='col-lg-12'>
+	<div class='col-lg-6'>
 		<h1>Peering details</h1>
 		<p><a href='/'>Back to peering list</a></p>
 	</div>
-
+	<div class='col-lg-6 float-right text-right'>
+		<a href='edit/' class='btn btn-primary'>Edit</a>
+		<a class='btn btn-secondary' href='https://stats.dn42.lutoma.org/detail.php?p=interface&amp;pi=wg.{{ peering.name }}&amp;t=if_octets&amp;h={{ peering.router.host_internal }}&amp;s=86400' target='_blank'>Traffic stats</a>
+		<a class='btn btn-secondary' href='https://lg.dn42.lutoma.org/alice/routeservers/{{ peering.router.lg_id }}/protocols/{{ peering.name }}/routes' target='_blank'>Routes</a>
+	</div>
 
 	<div class='col-lg-6' style='margin-top: 1rem;'>
 		<table class='table'>

@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.utils.decorators import method_decorator
@@ -23,12 +23,14 @@ class PeeringView(ListView):
 	def get_queryset(self):
 		return Peering.objects.filter(owner = self.request.user)
 
+
 @method_decorator(login_required, name='dispatch')
 class PeeringDetailView(DetailView):
 	model = Peering
 
 	def get_queryset(self):
 		return Peering.objects.filter(owner = self.request.user)
+
 
 class PeeringForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
@@ -65,8 +67,8 @@ class PeeringForm(forms.ModelForm):
 		model = Peering
 		fields = ['router', 'asn', 'vpn_type', 'endpoint', 'endpoint_internal', 'bandwidth_community', 'wg_peer_pubkey']
 
-@method_decorator(login_required, name='dispatch')
-class CreatePeeringView(CreateView):
+
+class PeeringMixin:
 	form_class = PeeringForm
 	template_name = 'peeringmanager/peering_form.html'
 
@@ -112,3 +114,12 @@ class CreatePeeringView(CreateView):
 		ssh.close()
 
 		return super().form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class CreatePeeringView(PeeringMixin, CreateView):
+	pass
+
+@method_decorator(login_required, name='dispatch')
+class UpdatePeeringView(PeeringMixin, UpdateView):
+	pass

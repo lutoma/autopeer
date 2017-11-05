@@ -19,10 +19,11 @@ from peeringmanager.views import *
 from django.contrib.auth.views import login
 
 urlpatterns = [
-	url(r'^$', PeeringView.as_view()),
-	url(r'^peerings/(?P<pk>[0-9]+)/$', PeeringDetailView.as_view()),
-	url(r'^peerings/new/$', CreatePeeringView.as_view()),
-	url(r'^accounts/login/$', login, name="login"),
+	url(r'^$', PeeringView.as_view(), name='index'),
+    url(r'^peerings/(?P<pk>[0-9]+)/$', PeeringDetailView.as_view(), name='peerings-detail'),
+	url(r'^peerings/(?P<pk>[0-9]+)/edit/$', UpdatePeeringView.as_view(), name='peerings-edit'),
+	url(r'^peerings/new/$', CreatePeeringView.as_view(), name='peerings-new'),
+	url(r'^accounts/login/$', login, name='login'),
 	url(r'^su/', include('django_su.urls')),
     url(r'^admin/', admin.site.urls),
 ]
