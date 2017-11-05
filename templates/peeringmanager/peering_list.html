@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load humanize %}
 
 {% block content %}
 <div class='row'>
@@ -15,6 +14,7 @@
 			<thead>
 				<tr>
 					<th scope='col'>ASN</th>
+					<th scope='col'>State</th>
 					<th scope='col'>Router</th>
 					<th scope='col'>Endpoint</th>
 					<th scope='col'>Type</th>
@@ -26,7 +26,15 @@
 			<tbody>
 				{% for peering in object_list %}
 					<tr>
+						{% with status=peering.get_status %}
 						<th scope='row'><a href='/peerings/{{peering.id}}/'>{{ peering.asn }}</a></th>
+						<td>
+							{% if status.state == 'up' %}
+								<span class='badge badge-success'>{{ status.state }}</span>
+							{% else %}
+								<span class='badge badge-warning'>{{ status.state }}</span>
+							{% endif %}
+						</td>
 						<td>
 							{{ peering.router.location }}<br />
 							<small>{{ peering.router.host_internal }}</small>
@@ -37,16 +45,15 @@
 						</td>
 						<td>{{ peering.get_vpn_type_display }}</td>
 						<td>
-							{% with routes=peering.get_routes %}
-								{% if routes %}
-									{{ routes.imported }} imported<br />
-									{{ routes.preferred }} preferred<br />
-									{{ routes.filtered }} filtered
-								{% else %}
-									<em>Not available</em>
-								{% endif %}
-							{% endwith %}
+							{% if status %}
+								{{ status.routes_received }} imported<br />
+								{{ status.routes_preferred }} preferred<br />
+								{{ status.routes_filtered }} filtered
+							{% else %}
+								<em>Not available</em>
+							{% endif %}
 						</td>
+						{% endwith %}
 						<td>
 							{% with traffic=peering.get_traffic %}
 								{% if traffic %}

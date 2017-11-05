@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block content %}
 <div class='row'>
 	<div class='col-lg-6'>
-		<h1>Peering details</h1>
+		<h1>{{ peering.endpoint }}</h1>
 		<p><a href='/'>Back to peering list</a></p>
 	</div>
 	<div class='col-lg-6 float-right text-right'>
@@ -69,6 +70,31 @@
 			</tbody>
 		</table>
 	</div>
+
+	{% with status=peering.get_status %}
+		<div class='col-lg-12' style='margin-top: 1rem;'>
+			<h2 style='margin-bottom: 1rem;'>Status</h2>
+			Last status change: {{ status.details.state_changed|naturaltime }}
+		</div>
+		<div class='col-lg-6' style='margin-top: 1rem;'>
+			<table class='table'>
+				<tbody>
+					<tr><th scope='row'>State</th><td>{{ status.state }}</td></tr>
+					<tr><th scope='row'>BGP state</th><td>{{ status.details.bgp_state }}</td></tr>
+					<tr><th scope='row'>Connection</th><td>{{ status.details.connection }}</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<div class='col-lg-6' style='margin-top: 1rem;'>
+			<table class='table'>
+				<tbody>
+					<tr><th scope='row'>Routes received</th><td>{{ status.routes_received }}</td></tr>
+					<tr><th scope='row'>Routes preferred</th><td>{{ status.routes_preferred }}</td></tr>
+					<tr><th scope='row'>Routes filtered</th><td>{{ status.routes_filtered }}</td></tr>
+				</tbody>
+			</table>
+		</div>
+	{% endwith %}
 
 	<div class='col-lg-12' style='margin-top: 1rem;'>
 		<h2 style='margin-bottom: 1rem;'>Traffic</h2>

@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from hurry.filesize import size
 from django.db import models
+import dateutil.parser
 import rrdtool
 import requests
 
@@ -57,20 +58,19 @@ class Peering(models.Model):
 	wg_peer_pubkey = models.CharField(max_length = 150, verbose_name = _('Wireguard public key'), help_text = _('See <a href=\'https://www.wireguard.com/quickstart/#key-generation\'>Wireguard manual</a> on how to generate the keys'))
 	wg_port = models.IntegerField(verbose_name = _('Wireguard port'))
 
-	def get_routes(self):
-		try:
-			r = requests.get('https://lg.dn42.lutoma.org/api/routeservers/{}/neighbours/{}/routes'.format(self.router.lg_id, self.name))
-			lg_data = r.json()
-
-			rrd = rrdtool.lastupdate('/var/lib/collectd/rrd/{}/bird/routes-{}.rrd'.format(self.router.host_internal, self.name))
-
-			return {
-				'imported': len(lg_data['imported']),
-				'filtered': len(lg_data['filtered']),
-				'preferred': int(rrd['ds']['value']),
-			}
-		except:
+	def get_status(self):
+		r = requests.get('https://lg.dn42.lutoma.org/api/routeservers/{}/neighbours'.format(self.router.lg_id))
+		if r.status_code != requests.codes.ok:
 			return None
+
+		lg_data = r.json()
+		status = list(filter(lambda x: x['id'] == self.name, lg_data['neighbours']))
+		if not status:
+			return
+
+		status[0]['details']['state_changed'] = dateutil.parser.parse(status[0]['details']['state_changed'])
+		return status[0]
+
 
 	def get_traffic(self):
 		rrd = '/var/lib/collectd/rrd/{}/interface-wg.{}/if_octets.rrd'.format(self.router.host_internal, self.name)

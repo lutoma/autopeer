@@ -6,3 +6,4 @@ paramiko==2.3.1
 django-su==0.5.2
 rrdtool==0.1.11
 hurry.filesize==0.9
+python-dateutil==2.6.1
