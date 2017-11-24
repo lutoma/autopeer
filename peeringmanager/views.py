@@ -53,7 +53,7 @@ class PeeringForm(forms.ModelForm):
 		return self.cleaned_data['endpoint_internal']
 
 	def clean_endpoint(self):
-		if not re.match(r'^(\[[0-9a-f\:]+\]|([0-9]{1,3}\.){4}|[a-zA-Z\.]+)\:[0-9]{1,5}$', self.cleaned_data['endpoint']):
+		if not re.match(r'^(\[[0-9a-f\:]+\]|([0-9]{1,3}\.?){4}|[a-zA-Z\.]+)\:[0-9]{1,5}$', self.cleaned_data['endpoint']):
 			raise ValidationError(_('Endpoint doesn\'t seem to be valid IP/hostname:port combo'))
 
 		return self.cleaned_data['endpoint']
