@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 import subprocess
 
 
-def get_whois_field(obj, field):
+def whois_query(obj):
 	try:
 		r = subprocess.run(['whois', '-h', 'whois.dn42', obj], stdout=subprocess.PIPE)
 		r.check_returncode()
@@ -16,7 +16,7 @@ def get_whois_field(obj, field):
 
 	whois_data = whois_data.splitlines()
 
-	values = list()
+	data = dict()
 	for line in whois_data:
 		line = line.strip()
 
@@ -24,9 +24,20 @@ def get_whois_field(obj, field):
 			continue
 
 		key, value = line.split(':', maxsplit=1)
+		key = key.strip()
 		value = value.strip()
 
-		if key == field:
-			values.append(value)
+		if key not in data:
+			data[key] = [value]
+		else:
+			data[key].append(value)
 
-	return values
+	return data
+
+
+def get_whois_field(obj, field):
+	data = whois_query(obj)
+	if field not in data:
+		return None
+
+	return data[field]

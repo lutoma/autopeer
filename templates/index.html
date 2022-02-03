@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap5 %}
+
+
+{% block title %}{% trans 'AS64719 autopeer' %}{% endblock %}
+{% block content %}
+	<div class="row align-items-center g-lg-5 py-5">
+		<div class="col-lg-7 text-center text-lg-start">
+			<h1 class="display-4 fw-bold lh-1 mb-3">AS64719 automatic peering</h1>
+			<p class="col-lg-10 fs-4">Welcome! This service will allow you to automatically establish a DN42 peering with AS64719 over Wireguard.</p>
+		</div>
+		<div class="col-md-10 mx-auto col-lg-5">
+			<form class="p-4 p-md-5 border rounded-3 bg-light" method='post' action='/signup/'>
+				{% csrf_token %}
+
+				<p>If this is your first time using the automatic peering service, you need to sign up using your <em>Maintainer</em> object from the DN42 registry (e.g. <code>FOOBAR-MNT</code>).</p>
+				<p>You will then receive an email with a login link to the email address of the listed <code>admin-c</code> contact.</p>
+
+				<div class="form-floating mb-3">
+					{% if form.name.errors %}
+						<input type="text" name="name" placeholder="FOOBAR-MNT" class="form-control is-invalid" value="{{ form.name.value }}" id="id_name">
+						<div class="invalid-feedback">{{ form.name.errors|join:',' }}</div>
+					{% else %}
+						<input type="text" name="name" placeholder="FOOBAR-MNT" class="form-control" id="id_name">
+					{% endif %}
+					<label for="id_name">Maintainer</label>
+				    <small class="form-text text-muted">Please enter your mntner object as it exists in the DN42 registry, including the -MNT suffix.</small>
+				</div>
+
+				<button class="w-100 btn btn-lg btn-primary" type="submit">{% trans 'Get verification link' %}</button>
+			</form>
+		</div>
+	</div>
+
+{% comment %}
+	<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+		<div class="feature col">
+			<h2>de-fra</h2>
+			<p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+			<a href="#" class="icon-link">
+				Call to action
+				<svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+			</a>
+		</div>
+		<div class="feature col">
+			<h2>us-lax</h2>
+			<p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+			<a href="#" class="icon-link">
+				Call to action
+				<svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+			</a>
+		</div>
+		<div class="feature col">
+			<h2>us-nyc</h2>
+			<p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+			<a href="#" class="icon-link">
+				Call to action
+				<svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+			</a>
+		</div>
+	</div>
+{% endcomment %}
+{% endblock %}

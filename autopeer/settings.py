@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'dn42auth',
     'peeringmanager',
-    'bootstrap4',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -103,7 +103,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTHENTICATION_BACKENDS = [
-    'dn42auth.auth.DN42Backend',
     'django.contrib.auth.backends.ModelBackend',
-    'django_su.backends.SuBackend',
 ]
+
+LOGIN_REDIRECT_URL = '/peerings/'
+LOGIN_URL = '/login/'
+
+POSTMARK_KEY = 'fb91f9f5-8a6d-4178-b0e0-56f9772d6b13'

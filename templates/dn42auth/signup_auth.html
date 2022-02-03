@@ -3,16 +3,16 @@
 {% load bootstrap5 %}
 
 
-{% block title %}{% trans 'Log in' %}{% endblock %}
+{% block title %}{% trans 'Sign up' %}{% endblock %}
 {% block content %}
 
 <div class="row">
 	<div class="col-lg-6">
-		<h1>Login</h1>
+		<h1>Sign up</h1>
 		<form method="post" action="">
 			{% csrf_token %}
 			{% bootstrap_form form %}
-			<input type="submit" value="{% trans 'Log in' %}" class="btn btn-primary" />
+			<input type="submit" value="{% trans 'Sign up' %}" class="btn btn-primary" />
 			<input type="hidden" name="next" value="{{ next }}" />
 		</form>
 	</div>
