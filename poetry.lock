@@ -1,12 +1,4 @@
 [[package]]
-name = "argparse"
-version = "1.4.0"
-description = "Python command-line parsing library"
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "asgiref"
 version = "3.5.0"
 description = "ASGI specs, helper code, and adapters"
@@ -196,17 +188,6 @@ python-versions = "*"
 six = ">=1.5"
 
 [[package]]
-name = "pythonwhois"
-version = "2.4.3"
-description = "Module for retrieving and parsing the WHOIS data for a domain. Supports most domains. No dependencies."
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-argparse = "*"
-
-[[package]]
 name = "requests"
 version = "2.27.1"
 description = "Python HTTP for Humans."
@@ -280,13 +261,9 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "a4a0fa2462af68c2baf5512692cc940d102f839c77c55d8168fa617961936969"
+content-hash = "45e502097a05a540c0f27bdfc4986cfb86fec4018d4e9ec082d425efd2440343"
 
 [metadata.files]
-argparse = [
-    {file = "argparse-1.4.0-py2.py3-none-any.whl", hash = "sha256:c31647edb69fd3d465a847ea3157d37bed1f95f19760b11a47aa91c04b666314"},
-    {file = "argparse-1.4.0.tar.gz", hash = "sha256:62b089a55be1d8949cd2bc7e0df0bddb9e028faefc8c32038cc84862aefdd6e4"},
-]
 asgiref = [
     {file = "asgiref-3.5.0-py3-none-any.whl", hash = "sha256:88d59c13d634dcffe0510be048210188edd79aeccb6a6c9028cdad6f31d730a9"},
     {file = "asgiref-3.5.0.tar.gz", hash = "sha256:2f8abc20f7248433085eda803936d98992f1343ddb022065779f37c5da0181d0"},
@@ -427,9 +404,6 @@ pynacl = [
 python-dateutil = [
     {file = "python-dateutil-2.6.1.tar.gz", hash = "sha256:891c38b2a02f5bb1be3e4793866c8df49c7d19baabf9c1bad62547e0b4866aca"},
     {file = "python_dateutil-2.6.1-py2.py3-none-any.whl", hash = "sha256:95511bae634d69bc7329ba55e646499a842bc4ec342ad54a8cdb65645a0aad3c"},
-]
-pythonwhois = [
-    {file = "pythonwhois-2.4.3.tar.gz", hash = "sha256:759c75d38436a8084c2b9ce92eecdf9d4473f40676ffceec520a4a862a13b68a"},
 ]
 requests = [
     {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},

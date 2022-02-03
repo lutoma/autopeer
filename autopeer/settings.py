@@ -10,7 +10,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    'django_su',  # must be before ``django.contrib.admin``
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

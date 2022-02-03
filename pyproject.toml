@@ -8,7 +8,6 @@ authors = ["Lukas Martini <hello@lutoma.org>"]
 python = "^3.10"
 Django = "4.0.2"
 django-bootstrap4 = "21.2"
-pythonwhois = "2.4.3"
 requests = "2.27.1"
 paramiko = "2.9.2"
 rrdtool = "0.1.11"
