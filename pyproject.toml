@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "autopeer"
+version = "0.1.0"
+description = ""
+authors = ["Lukas Martini <hello@lutoma.org>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "4.0.2"
+django-bootstrap4 = "21.2"
+pythonwhois = "2.4.3"
+requests = "2.27.1"
+paramiko = "2.9.2"
+django-su = "0.9.0"
+rrdtool = "0.1.11"
+"hurry.filesize" = "0.9"
+python-dateutil = "2.6.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

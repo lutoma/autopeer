@@ -1,6 +1,5 @@
 # coding: utf-8
-from django.utils.translation import ugettext_lazy as _
-from django.shortcuts import render
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -9,19 +8,19 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django import forms
 from subprocess import Popen, PIPE
-from functools import reduce
-from .models import *
+from .models import Peering, Router
 from .whois import get_whois_field
 import paramiko
 import json
 import re
+
 
 @method_decorator(login_required, name='dispatch')
 class PeeringView(ListView):
 	model = Peering
 
 	def get_queryset(self):
-		return Peering.objects.filter(owner = self.request.user)
+		return Peering.objects.filter(owner=self.request.user)
 
 
 @method_decorator(login_required, name='dispatch')
@@ -29,7 +28,7 @@ class PeeringDetailView(DetailView):
 	model = Peering
 
 	def get_queryset(self):
-		return Peering.objects.filter(owner = self.request.user)
+		return Peering.objects.filter(owner=self.request.user)
 
 
 class PeeringForm(forms.ModelForm):
@@ -65,7 +64,8 @@ class PeeringForm(forms.ModelForm):
 
 	class Meta:
 		model = Peering
-		fields = ['router', 'asn', 'vpn_type', 'endpoint', 'endpoint_internal', 'bandwidth_community', 'wg_peer_pubkey']
+		fields = ['router', 'asn', 'vpn_type', 'endpoint', 'endpoint_internal',
+			'bandwidth_community', 'wg_peer_pubkey']
 
 
 class PeeringMixin:
@@ -73,7 +73,7 @@ class PeeringMixin:
 	template_name = 'peeringmanager/peering_form.html'
 
 	def get_queryset(self):
-		return Peering.objects.filter(owner = self.request.user)
+		return Peering.objects.filter(owner=self.request.user)
 
 	def get_form_kwargs(self):
 		kwargs = super().get_form_kwargs()
@@ -89,22 +89,24 @@ class PeeringMixin:
 			form.instance.wg_privkey = privkey.decode('utf-8').strip()
 
 		with Popen(["wg", "pubkey"], stdout=PIPE, stdin=PIPE) as proc:
-			pubkey = proc.communicate(input = privkey)[0]
+			pubkey = proc.communicate(input=privkey)[0]
 			form.instance.wg_pubkey = pubkey.decode('utf-8').strip()
 
 		form.instance.router.wg_last_port += 1
 		form.instance.wg_port = form.instance.router.wg_last_port
 		form.instance.router.save()
 
-		fields = ['asn', 'endpoint', 'endpoint_internal', 'bandwidth_community', 'wg_privkey', 'wg_peer_pubkey', 'wg_port', 'name']
+		fields = ['asn', 'endpoint', 'endpoint_internal', 'bandwidth_community', 'wg_privkey',
+			'wg_peer_pubkey', 'wg_port', 'name']
+
 		data = map(lambda c: (c, getattr(form.instance, c)), fields)
 		data = json.dumps(dict(data))
 
 		ssh = paramiko.SSHClient()
 		ssh.load_system_host_keys()
 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		ssh.connect(form.instance.router.host_external, username = 'autopeer', banner_timeout = 5,
-			look_for_keys = True, allow_agent = False)
+		ssh.connect(form.instance.router.host_external, username='autopeer', banner_timeout=5,
+			look_for_keys=True, allow_agent=False)
 
 		(stdin, stdout, stderr) = ssh.exec_command('/usr/bin/sudo /usr/local/bin/autopeer-modify')
 		stdin.write(data + '\n')
@@ -119,6 +121,7 @@ class PeeringMixin:
 @method_decorator(login_required, name='dispatch')
 class CreatePeeringView(PeeringMixin, CreateView):
 	pass
+
 
 @method_decorator(login_required, name='dispatch')
 class UpdatePeeringView(PeeringMixin, UpdateView):
