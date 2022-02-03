@@ -127,17 +127,6 @@ beautifulsoup4 = ">=4.8.0"
 Django = ">=2.2"
 
 [[package]]
-name = "django-su"
-version = "0.9.0"
-description = "Login as any user from the Django admin interface, then switch back when done"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-django = ">=1.11"
-
-[[package]]
 name = "hurry.filesize"
 version = "0.9"
 description = "A simple Python library for human readable file sizes (or anything sized in bytes)."
@@ -291,7 +280,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "f117abdd6bee2476bdbe9e38cbaeefde8bc50d913580d7c09dd178d1a8942c93"
+content-hash = "a4a0fa2462af68c2baf5512692cc940d102f839c77c55d8168fa617961936969"
 
 [metadata.files]
 argparse = [
@@ -407,10 +396,6 @@ django = [
 django-bootstrap4 = [
     {file = "django-bootstrap4-21.2.tar.gz", hash = "sha256:0b9eeafecd132c0e6af8688493816fc2ae172d2eb3d98e66dc5eb48757da65df"},
     {file = "django_bootstrap4-21.2-py3-none-any.whl", hash = "sha256:46f9ea3789bc1a2fa5db94b9439e2a755cca582af06af0c6cfc76d70b6e5702c"},
-]
-django-su = [
-    {file = "django-su-0.9.0.tar.gz", hash = "sha256:8f624aed76bd93febe75554b5f14230be56a741d1cf8375673232f0e161af6c5"},
-    {file = "django_su-0.9.0-py2.py3-none-any.whl", hash = "sha256:e51fec387e12c30c0e81abe2ccfa0a1927be2340cea329b7667478156f50b542"},
 ]
 "hurry.filesize" = [
     {file = "hurry.filesize-0.9.tar.gz", hash = "sha256:f5368329adbef86accd3bc9490522340bb79260455ae89b1a42c10f63801b9a6"},
