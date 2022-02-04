@@ -28,6 +28,7 @@ gulp.task('fonts', () => {
 gulp.task('js-libs', () => {
 	return gulp.src([
 		'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
+		'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map',
 	])
 	.pipe(gulp.dest('static/js'))
 })
