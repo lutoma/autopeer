@@ -108,7 +108,7 @@ class Peering(models.Model):
 			return None
 
 	def get_traffic(self):
-		rrd = f'/var/lib/collectd/rrd/{self.router.host_internal}/interface-wg.{self.name}/if_octets.rrd'
+		rrd = f'/var/lib/collectd/rrd/{self.router.host_external}/interface-wg.{self.name}/if_octets.rrd'
 		try:
 			data = rrdtool.graphv('-',
 				f'DEF:tx={rrd}:tx:AVERAGE',
