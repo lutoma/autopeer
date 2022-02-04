@@ -24,8 +24,8 @@
 
 					<div class="text-end">
 						{% if not user.is_authenticated %}
-							<a href="/login/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-to-bracket"></i> Login</a>
-							{#<a href="/login/" class="btn btn-warning">Sign up</a>#}
+							<a href="/login/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-to-bracket"></i> Log in</a>
+							<a href="/signup/" class="btn btn-warning"><i class="fa-regular fa-user-plus"></i>  Sign up</a>
 						{% else %}
 							<a href="/logout/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-from-bracket"></i> Log out</a>
 						{% endif %}

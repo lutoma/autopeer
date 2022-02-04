@@ -9,10 +9,32 @@
 <div class="row">
 	<div class="col-lg-6">
 		<h1>Login</h1>
-		<form method="post" action="">
+
+		<form class="mt-4" method="post" action="">
 			{% csrf_token %}
-			{% bootstrap_form form %}
-			<input type="submit" value="{% trans 'Log in' %}" class="btn btn-primary" />
+
+			<div class="form-floating mb-3">
+				{% if form.email.errors %}
+					<input type="text" name="username" placeholder="" class="form-control is-invalid" value="{{ form.email.value }}" id="id_email">
+					<div class="invalid-feedback">{{ form.email.errors|join:',' }}</div>
+				{% else %}
+					<input type="text" name="username" placeholder="" class="form-control" id="id_name">
+				{% endif %}
+				<label for="id_email">Email address</label>
+			</div>
+
+			<div class="form-floating mb-3">
+				{% if form.email.errors %}
+					<input type="password" name="password" placeholder="" class="form-control is-invalid" id="id_password">
+					<div class="invalid-feedback">{{ form.password.errors|join:',' }}</div>
+				{% else %}
+					<input type="password" name="password" placeholder="" class="form-control" id="id_password">
+				{% endif %}
+				<label for="id_password">Password</label>
+			</div>
+
+
+			<button type="submit" class="btn btn-primary"><i class="fa-regular fa-arrow-right-to-bracket"></i> {% trans 'Log in' %}</button>
 			<input type="hidden" name="next" value="{{ next }}" />
 		</form>
 	</div>

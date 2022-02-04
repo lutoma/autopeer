@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap5 %}
+
+
+{% block title %}{% trans 'Logged out' %}{% endblock %}
+{% block content %}
+
+<div class="row">
+	<div class="col-lg-6">
+		<h1><i class="fa-light fa-hand-wave"></i> Bye!</h1>
+		<p class="mt-4">You have succesfully been logged out.</p>
+	</div>
+</div>
+{% endblock %}

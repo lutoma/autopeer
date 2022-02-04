@@ -54,9 +54,9 @@ class VerificationForm(forms.Form):
 
 
 class DN42VerificationView(FormView):
-	template_name = 'index.html'
+	template_name = 'dn42auth/signup.html'
 	form_class = VerificationForm
-	success_url = '/login/sent/'
+	success_url = '/signup/sent/'
 
 	def form_valid(self, form):
 		jwt_data = jwt.encode({
