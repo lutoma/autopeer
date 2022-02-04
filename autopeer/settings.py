@@ -102,11 +102,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-]
 
 LOGIN_REDIRECT_URL = '/peerings/'
 LOGIN_URL = '/login/'
 
 POSTMARK_KEY = 'fb91f9f5-8a6d-4178-b0e0-56f9772d6b13'
+AUTH_USER_MODEL = 'dn42auth.DN42User'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

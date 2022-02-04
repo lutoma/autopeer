@@ -1,5 +1,5 @@
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import User
+from dn42auth.models import DN42User
 from hurry.filesize import size
 from django.db import models
 import dateutil.parser
@@ -19,7 +19,7 @@ class Router(models.Model):
 	lg_id = models.IntegerField(verbose_name=_('Looking Glass ID'), default=0)
 
 	def __str__(self):
-		return self.location
+		return f'{self.location} ({self.host_external})'
 
 	class Meta:
 		ordering = ['location']
@@ -45,9 +45,9 @@ class Peering(models.Model):
 		('wireguard', _('Wireguard')),
 	)
 
-	owner = models.ForeignKey(User, verbose_name=_('Owner'), on_delete=models.CASCADE)
+	owner = models.ForeignKey(DN42User, verbose_name=_('Owner'), on_delete=models.CASCADE)
 	asn = models.BigIntegerField(verbose_name=_('AS Number'),
-		help_text=_('Your MNTNER object must be listed as mnt-by for the AS'))
+		help_text=_('Your maintainer object must be listed as mnt-by for the AS'))
 
 	vpn_type = models.CharField(max_length=50, choices=VPN_CHOICES,
 		verbose_name=_('VPN type'), default='wireguard',
@@ -56,9 +56,16 @@ class Peering(models.Model):
 	endpoint = models.CharField(max_length=200, verbose_name=_('Wireguard endpoint'),
 		help_text=_('Hostname/IP and port, e.g. example.org:1234, 127.0.0.1:1234, [::1]:1234'))
 
-	endpoint_internal = models.GenericIPAddressField(protocol='IPv4',
-		verbose_name=_('Internal router IP'),
-		help_text=_('The routers IP within dn42. This will be used for the BGP session'))
+	endpoint_internal_v4 = models.GenericIPAddressField(protocol='IPv4',
+		verbose_name=_('Internal IPv4 address'),
+		help_text=_('Internal DN42 address of your router'))
+
+	endpoint_internal_v6 = models.GenericIPAddressField(protocol='IPv6',
+		verbose_name=_('Link-local IPv6 address'),
+		help_text=_('Link-local IPv6 address of your router'))
+
+	mbgp_enabled = models.BooleanField(default=True, verbose_name=_('Multi-protocol BGP over IPv6'),
+		help_text=_('If set, the router will establish a Multi-protocol session for both IPv4 and IPv6 over the IPv6 link-local address (RFC 4760)'))
 
 	router = models.ForeignKey(Router, verbose_name=_('Router'), on_delete=models.CASCADE)
 	bandwidth_community = models.IntegerField(choices=BANDWIDTH_CHOICES, default=24,
@@ -117,7 +124,7 @@ class Peering(models.Model):
 		unique_together = [
 			('router', 'asn'),
 			('router', 'wg_port'),
-			('router', 'endpoint_internal'),
+			('router', 'endpoint_internal_v4'),
 			('router', 'name'),
 		]
 

@@ -6,7 +6,7 @@ from peeringmanager.whois import whois_query
 from autopeer.email import send_email
 from django.contrib.auth import login
 from django.conf import settings
-from django.contrib.auth.models import User
+from dn42auth.models import DN42User
 from django import forms
 import jwt
 
@@ -84,7 +84,7 @@ class SignupForm(forms.ModelForm):
 		return user
 
 	class Meta:
-		model = User
+		model = DN42User
 		fields = ['email', 'password']
 
 
@@ -107,7 +107,7 @@ class DN42SignupView(CreateView):
 		return initial
 
 	def form_valid(self, form):
-		form.instance.username = self.jwt_data['name']
+		form.instance.dn42_mntner = self.jwt_data['name']
 		r = super().form_valid(form)
 		login(self.request, form.instance)
 		return r

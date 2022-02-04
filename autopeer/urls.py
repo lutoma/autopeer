@@ -17,7 +17,9 @@ urlpatterns = [
 
 	path('change-password/', auth_views.PasswordChangeView.as_view()),
 	path('login/', auth_views.LoginView.as_view()),
+	path('logout/', auth_views.LogoutView.as_view()),
 	path('login/sent/', TemplateView.as_view(template_name='dn42auth/login_sent.html'), name='login-sent'),
+
 	path('signup/', DN42VerificationView.as_view(), name='signup-verification'),
 	path('signup/finish/<str:jwt>/', DN42SignupView.as_view(), name='signup-auth'),
 	path('admin/', admin.site.urls),

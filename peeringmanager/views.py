@@ -38,20 +38,20 @@ class PeeringForm(forms.ModelForm):
 
 	def clean_asn(self):
 		mntby = get_whois_field('AS{}'.format(self.cleaned_data['asn']), 'mnt-by')
-		if self.user.username not in mntby:
-			raise ValidationError(_('User is not listed as mnt-by for this AS'))
+		if not mntby or self.user.dn42_mntner not in mntby:
+			raise ValidationError(_('AS does not exist or user is not listed as mnt-by for this AS'))
 
 		return self.cleaned_data['asn']
 
-	def clean_endpoint_internal(self):
-		mntby = get_whois_field('{}'.format(self.cleaned_data['endpoint_internal']), 'mnt-by')
-		if self.user.username not in mntby:
+	def clean_endpoint_internal_v4(self):
+		mntby = get_whois_field('{}'.format(self.cleaned_data['endpoint_internal_v4']), 'mnt-by')
+		if self.user.dn42_mntner not in mntby:
 			raise ValidationError(_('User is not listed as mnt-by for the internal router IP'))
 
-		return self.cleaned_data['endpoint_internal']
+		return self.cleaned_data['endpoint_internal_v4']
 
 	def clean_endpoint(self):
-		if not re.match(r'^(\[[0-9a-f\:]+\]|([0-9]{1,3}\.?){4}|[a-zA-Z\.]+)\:[0-9]{1,5}$', self.cleaned_data['endpoint']):
+		if not re.match(r'^(\[[0-9a-f\:]+\]|([0-9]{1,3}\.){3}[0-9]{1,3}|[-.a-zA-Z0-9]+\.[a-zA-Z]+)\:[0-9]{1,5}$', self.cleaned_data['endpoint']):
 			raise ValidationError(_('Endpoint doesn\'t seem to be valid IP/hostname:port combo'))
 
 		return self.cleaned_data['endpoint']
@@ -63,8 +63,8 @@ class PeeringForm(forms.ModelForm):
 
 	class Meta:
 		model = Peering
-		fields = ['router', 'asn', 'vpn_type', 'endpoint', 'endpoint_internal',
-			'bandwidth_community', 'wg_peer_pubkey']
+		fields = ['router', 'name', 'asn', 'vpn_type', 'endpoint', 'endpoint_internal_v4',
+			'endpoint_internal_v6', 'mbgp_enabled', 'bandwidth_community', 'wg_peer_pubkey']
 
 
 class PeeringMixin:
@@ -95,8 +95,8 @@ class PeeringMixin:
 		form.instance.wg_port = form.instance.router.wg_last_port
 		form.instance.router.save()
 
-		fields = ['asn', 'endpoint', 'endpoint_internal', 'bandwidth_community', 'wg_privkey',
-			'wg_peer_pubkey', 'wg_port', 'name']
+		fields = ['asn', 'endpoint', 'endpoint_internal_v4', 'endpoint_internal_v6', 'mbgp_enabled',
+			'bandwidth_community', 'wg_privkey', 'wg_peer_pubkey', 'wg_port', 'name']
 
 		data = map(lambda c: (c, getattr(form.instance, c)), fields)
 		data = json.dumps(dict(data))
@@ -107,7 +107,7 @@ class PeeringMixin:
 		ssh.connect(form.instance.router.host_external, username='autopeer', banner_timeout=5,
 			look_for_keys=True, allow_agent=False)
 
-		(stdin, stdout, stderr) = ssh.exec_command('/usr/bin/sudo /usr/local/bin/autopeer-modify')
+		(stdin, stdout, stderr) = ssh.exec_command('/usr/bin/sudo /usr/local/bin/autopeer-update')
 		stdin.write(data + '\n')
 		stdin.flush()
 		print(stdout.read())
