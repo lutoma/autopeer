@@ -95,11 +95,11 @@ class Peering(models.Model):
 			return None
 
 	def get_traffic(self):
-		rrd = '/var/lib/collectd/rrd/{}/interface-wg.{}/if_octets.rrd'.format(self.router.host_internal, self.name)
+		rrd = f'/var/lib/collectd/rrd/{self.router.host_internal}/interface-wg.{self.name}/if_octets.rrd'
 		try:
 			data = rrdtool.graphv('-',
-				'DEF:tx={}:tx:AVERAGE'.format(rrd),
-				'DEF:rx={}:rx:AVERAGE'.format(rrd),
+				f'DEF:tx={rrd}:tx:AVERAGE',
+				f'DEF:rx={rrd}:rx:AVERAGE',
 				'VDEF:txa=tx,AVERAGE',
 				'VDEF:rxa=rx,AVERAGE',
 				'PRINT:txa:%lf',
@@ -114,10 +114,10 @@ class Peering(models.Model):
 			return None
 
 	def get_absolute_url(self):
-		return '/peerings/{}/'.format(self.id)
+		return f'/peerings/{self.id}/'
 
 	def __str__(self):
-		return 'Peering with AS{} at {}'.format(self.asn, self.router)
+		return f'Peering with AS{self.asn} at {self.router}'
 
 	class Meta:
 		unique_together = [
