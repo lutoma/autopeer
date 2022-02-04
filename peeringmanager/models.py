@@ -2,9 +2,9 @@ from django.utils.translation import gettext_lazy as _
 from dn42auth.models import DN42User
 from hurry.filesize import size
 from django.db import models
-import dateutil.parser
 import rrdtool
 import requests
+import re
 
 
 class Router(models.Model):
@@ -16,7 +16,7 @@ class Router(models.Model):
 	active = models.BooleanField(default=True, verbose_name=_('Active'),
 		help_text=_('Users can only create peerings to active routers'))
 
-	lg_id = models.IntegerField(verbose_name=_('Looking Glass ID'), default=0)
+	lg_id = models.CharField(verbose_name=_('Looking Glass ID'), max_length=150)
 
 	def __str__(self):
 		return f'{self.location} ({self.host_external})'
@@ -26,13 +26,6 @@ class Router(models.Model):
 
 
 class Peering(models.Model):
-	ROUTER_CHOICES = (
-		('at-grz.gw.lutoma.dn42', 'Graz, Austria'),
-		('de-scn.gw.lutoma.dn42', 'Saarbrücken, Germany'),
-		('ca-mon.gw.lutoma.dn42', 'Montréal, Canada'),
-		('us-lax.gw.lutoma.dn42', 'Los Angeles, USA'),
-	)
-
 	BANDWIDTH_CHOICES = (
 		(21, '≥0.1mbit'),
 		(22, '≥1mbit'),
@@ -73,7 +66,7 @@ class Peering(models.Model):
 		help_text=_('Used to set <a href=\'https://wiki.dn42/howto/Bird-communities\'>BGP communities</a>'))
 
 	name = models.CharField(max_length=25, verbose_name=_('Peering name'),
-		help_text=_('Used for the interface name (wg.name) and bird peering name etc.'))
+		help_text=_('A human-readable name for this peering. Usually your nickname or a network name. Used for the Wireguard interface name, in the looking glass, and similar places. Lowercase ASCII only, max. 25 chars.'))
 
 	wg_privkey = models.CharField(max_length=150, verbose_name=_('Wireguard private key'))
 	wg_pubkey = models.CharField(max_length=150, verbose_name=_('Wireguard public key'))
@@ -82,18 +75,24 @@ class Peering(models.Model):
 
 	wg_port = models.IntegerField(verbose_name=_('Wireguard port'))
 
+	def lg_count_req(self, req):
+		req_data = {'servers': [self.router.lg_id], 'type': 'bird', 'args': req}
+		res = requests.post('https://lg.dn42.lutoma.org/api/', json=req_data)
+		regex_res = re.match(r'^([0-9]+) of.*$', res.json()['result'][0]['data'])
+		return regex_res.group(1)
+
 	def get_status(self):
-		r = requests.get('https://lg.dn42.lutoma.org/api/routeservers/{}/neighbours'.format(self.router.lg_id))
-		if r.status_code != requests.codes.ok:
+		try:
+			return {
+				'routes_v4': self.lg_count_req(f'show route protocol {self.name} table peers4 count'),
+				'routes_v4_primary': self.lg_count_req(f'show route protocol {self.name} table peers4 count primary'),
+				'routes_v4_filtered': self.lg_count_req(f'show route protocol {self.name} table peers4 count filtered'),
+				'routes_v6': self.lg_count_req(f'show route protocol {self.name} table peers6 count'),
+				'routes_v6_primary': self.lg_count_req(f'show route protocol {self.name} table peers6 count primary'),
+				'routes_v6_filtered': self.lg_count_req(f'show route protocol {self.name} table peers6 count filtered')
+			}
+		except Exception:
 			return None
-
-		lg_data = r.json()
-		status = list(filter(lambda x: x['id'] == self.name, lg_data['neighbours']))
-		if not status:
-			return
-
-		status[0]['details']['state_changed'] = dateutil.parser.parse(status[0]['details']['state_changed'])
-		return status[0]
 
 	def get_traffic(self):
 		rrd = '/var/lib/collectd/rrd/{}/interface-wg.{}/if_octets.rrd'.format(self.router.host_internal, self.name)
@@ -111,7 +110,7 @@ class Peering(models.Model):
 				'rx': size(float(data['print[1]'])),
 			}
 			return data
-		except:
+		except Exception:
 			return None
 
 	def get_absolute_url(self):

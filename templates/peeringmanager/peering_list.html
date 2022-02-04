@@ -46,9 +46,9 @@
 						<td>{{ peering.get_vpn_type_display }}</td>
 						<td>
 							{% if status %}
-								{{ status.routes_received }} imported<br />
-								{{ status.routes_preferred }} preferred<br />
-								{{ status.routes_filtered }} filtered
+								{{ status.routes_v4 }}+{{ status.routes_v6 }} imported<br />
+								{{ status.routes_v4_primary }}+{{ status.routes_v6_primary }} preferred<br />
+								{{ status.routes_v4_filtered }}+{{ status.routes_v6_filtered }} filtered
 							{% else %}
 								<em>Not available</em>
 							{% endif %}

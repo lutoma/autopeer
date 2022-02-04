@@ -9,7 +9,8 @@ from django import forms
 from subprocess import Popen, PIPE
 from .models import Peering, Router
 from .whois import get_whois_field
-import paramiko
+from io import StringIO
+import fabric
 import json
 import re
 
@@ -81,38 +82,32 @@ class PeeringMixin:
 
 	def form_valid(self, form):
 		form.instance.owner = self.request.user
-		form.instance.name = 'as{}'.format(form.instance.asn)
 
-		with Popen(["wg", "genkey"], stdout=PIPE) as proc:
-			privkey = proc.stdout.read()
-			form.instance.wg_privkey = privkey.decode('utf-8').strip()
+		if not form.instance.wg_privkey or not form.instance.wg_pubkey:
+			with Popen(["wg", "genkey"], stdout=PIPE) as proc:
+				privkey = proc.stdout.read()
+				form.instance.wg_privkey = privkey.decode('utf-8').strip()
 
-		with Popen(["wg", "pubkey"], stdout=PIPE, stdin=PIPE) as proc:
-			pubkey = proc.communicate(input=privkey)[0]
-			form.instance.wg_pubkey = pubkey.decode('utf-8').strip()
+			with Popen(["wg", "pubkey"], stdout=PIPE, stdin=PIPE) as proc:
+				pubkey = proc.communicate(input=privkey)[0]
+				form.instance.wg_pubkey = pubkey.decode('utf-8').strip()
 
 		form.instance.router.wg_last_port += 1
 		form.instance.wg_port = form.instance.router.wg_last_port
 		form.instance.router.save()
 
-		fields = ['asn', 'endpoint', 'endpoint_internal_v4', 'endpoint_internal_v6', 'mbgp_enabled',
+		fields = ['id', 'asn', 'endpoint', 'endpoint_internal_v4', 'endpoint_internal_v6', 'mbgp_enabled',
 			'bandwidth_community', 'wg_privkey', 'wg_peer_pubkey', 'wg_port', 'name']
 
 		data = map(lambda c: (c, getattr(form.instance, c)), fields)
 		data = json.dumps(dict(data))
+		data_stream = StringIO(data)
 
-		ssh = paramiko.SSHClient()
-		ssh.load_system_host_keys()
-		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		ssh.connect(form.instance.router.host_external, username='autopeer', banner_timeout=5,
-			look_for_keys=True, allow_agent=False)
+		ssh_host = form.instance.router.host_external
+		print(f'Connecting to {ssh_host} to update peering #{form.instance.id}')
 
-		(stdin, stdout, stderr) = ssh.exec_command('/usr/bin/sudo /usr/local/bin/autopeer-update')
-		stdin.write(data + '\n')
-		stdin.flush()
-		print(stdout.read())
-		print(stderr.read())
-		ssh.close()
+		with fabric.Connection(ssh_host, user='autopeer', connect_timeout=5) as conn:
+			conn.run('/usr/bin/sudo /usr/local/bin/autopeer-update', in_stream=data_stream)
 
 		return super().form_valid(form)
 
