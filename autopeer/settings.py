@@ -3,8 +3,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5%v94mh4mq)(_b$db-ltfhshq+lj4sq*y^ro+m(3qes&*n2xdp'
+SECRET_KEY = 'changeme'
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -106,6 +105,12 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/peerings/'
 LOGIN_URL = '/login/'
 
-POSTMARK_KEY = 'fb91f9f5-8a6d-4178-b0e0-56f9772d6b13'
+POSTMARK_KEY = ''
 AUTH_USER_MODEL = 'dn42auth.DN42User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Use the file local_settings.py to overwrite the defaults with your own settings
+try:
+    from autopeer.settings_local import *  # noqa: F403 F401
+except ImportError:
+    pass
