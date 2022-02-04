@@ -63,7 +63,7 @@ class Peering(models.Model):
 	router = models.ForeignKey(Router, verbose_name=_('Router'), on_delete=models.CASCADE)
 	bandwidth_community = models.IntegerField(choices=BANDWIDTH_CHOICES, default=24,
 		verbose_name=_('Link bandwidth'),
-		help_text=_('Used to set <a href=\'https://wiki.dn42/howto/Bird-communities\'>BGP communities</a>'))
+		help_text=_('Used to set <a href="https://dn42.eu/howto/Bird-communities">BGP communities</a>'))
 
 	name = models.CharField(max_length=25, verbose_name=_('Peering name'),
 		help_text=_('A human-readable name for this peering. Usually your nickname or a network name. Used for the Wireguard interface name, in the looking glass, and similar places. Lowercase ASCII only, max. 25 chars.'))
@@ -75,21 +75,34 @@ class Peering(models.Model):
 
 	wg_port = models.IntegerField(verbose_name=_('Wireguard port'))
 
-	def lg_count_req(self, req):
+	@property
+	def endpoint_port(self):
+		return self.endpoint.rsplit(':', maxsplit=1)[-1]
+
+	def lg_request(self, req):
 		req_data = {'servers': [self.router.lg_id], 'type': 'bird', 'args': req}
 		res = requests.post('https://lg.dn42.lutoma.org/api/', json=req_data)
-		regex_res = re.match(r'^([0-9]+) of.*$', res.json()['result'][0]['data'])
+		return res.json()['result'][0]['data']
+
+	def lg_route_count(self, table, constraint=''):
+		data = self.lg_request(f'show route protocol {self.name} table {table} count {constraint}')
+		regex_res = re.match(r'^([0-9]+) of.*$', data)
 		return regex_res.group(1)
 
 	def get_status(self):
 		try:
+			details = self.lg_request(f'show protocols all {self.name}')
+			state_array = details.splitlines()[1].split()
+
 			return {
-				'routes_v4': self.lg_count_req(f'show route protocol {self.name} table peers4 count'),
-				'routes_v4_primary': self.lg_count_req(f'show route protocol {self.name} table peers4 count primary'),
-				'routes_v4_filtered': self.lg_count_req(f'show route protocol {self.name} table peers4 count filtered'),
-				'routes_v6': self.lg_count_req(f'show route protocol {self.name} table peers6 count'),
-				'routes_v6_primary': self.lg_count_req(f'show route protocol {self.name} table peers6 count primary'),
-				'routes_v6_filtered': self.lg_count_req(f'show route protocol {self.name} table peers6 count filtered')
+				'state': state_array[5],
+				'state_since': state_array[4],
+				'routes_v4': self.lg_route_count('peers4'),
+				'routes_v4_primary': self.lg_route_count('peers4', 'primary'),
+				'routes_v4_filtered': self.lg_route_count('peers4', 'filtered'),
+				'routes_v6': self.lg_route_count('peers6'),
+				'routes_v6_primary': self.lg_route_count('peers6', 'primary'),
+				'routes_v6_filtered': self.lg_route_count('peers6', 'filtered')
 			}
 		except Exception:
 			return None

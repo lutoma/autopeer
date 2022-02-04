@@ -2,16 +2,25 @@
 {% load humanize %}
 
 {% block content %}
+{% with status=peering.get_status %}
 <div class='row'>
-	<div class='col-lg-6'>
-		<h1>{{ peering.endpoint }}</h1>
-		<h4>{{ object.router.location }}</h4>
-	</div>
+	<div class='col-lg-12 d-flex justify-content-between'>
+		<div>
+			<h1>{{ peering.endpoint }}</h1>
+			<h4>{{ object.router.location }} / BGP state:
+				{% if status.state == 'Established' %}
+					<span class='text-success'>{{ status.state }}</span>
+				{% else %}
+					<span class='text-warning'>{{ status.state }}</span>
+				{% endif %}
+			</h4>
+		</div>
 
-	<div class='col-lg-6 float-right text-right'>
-		<a href='edit/' class='btn btn-primary'>Edit</a>
-		<a class='btn btn-secondary' href='https://stats.dn42.lutoma.org/detail.php?p=interface&amp;pi=wg.{{ peering.name }}&amp;t=if_octets&amp;h={{ peering.router.host_internal }}&amp;s=86400' target='_blank'>Traffic stats</a>
-		<a class='btn btn-secondary' href='https://lg.dn42.lutoma.org/detail/{{ peering.router.lg_id }}/{{ peering.name }}' target='_blank'>Looking glass</a>
+		<div>
+			<a class='btn btn-secondary' href='https://stats.dn42.lutoma.org/detail.php?p=interface&amp;pi=wg.{{ peering.name }}&amp;t=if_octets&amp;h={{ peering.router.host_internal }}&amp;s=86400' target='_blank'>Traffic stats</a>
+			<a class='btn btn-secondary' href='https://lg.dn42.lutoma.org/detail/{{ peering.router.lg_id }}/{{ peering.name }}' target='_blank'>Looking glass</a>
+			<a href='edit/' class='btn btn-primary'>Edit</a>
+		</div>
 	</div>
 
 	<div class='col-lg-6 mt-3'>
@@ -79,9 +88,10 @@
 		</div>
 	</div>
 
-	{% with status=peering.get_status %}
-		<div class='col-lg-6 mt-3'>
-			<h2 class='mb-2'>Routes</h2>
+
+	<div class='col-lg-6 mt-3'>
+		<h2 class='mb-2'>Routes</h2>
+		{% if status %}
 			<table class='table'>
 				<tbody>
 					<tr><th scope='row'>Received routes</th><td>{{ status.routes_v4 }} IPv4 / {{ status.routes_v6 }} IPv6</td></tr>
@@ -89,8 +99,11 @@
 					<tr><th scope='row'>Filtered routes</th><td>{{ status.routes_v4_filtered }} IPv4 / {{ status.routes_v6_filtered }} IPv6</td></tr>
 				</tbody>
 			</table>
-		</div>
-	{% endwith %}
+		{% else %}
+			<em>Route stats are not available.</em>
+		{% endif %}
+
+	</div>
 
 	<div class='col-lg-6 mt-3'>
 		<h2 class='mb-2'>Traffic</h2>
@@ -109,7 +122,7 @@
 		<h3>wg-quick</h3>
 		<code>
 			[Interface]<br />
-			ListenPort = <em>replace me</em><br />
+			ListenPort = {{object.endpoint_port}}<br />
 			PrivateKey = <em>replace me</em><br />
 			PostUp = /sbin/ip addr add dev %i 172.22.119.1/32 peer {{object.endpoint_internal_v4}}/32<br />
 			PostUp = /sbin/ip addr add dev %i {{object.endpoint_internal_v6}}/128 peer fe80::acab/128<br />
@@ -124,11 +137,26 @@
 	<div class='col-lg-6' style='margin-top: .6rem;'>
 		<h3>Bird</h3>
 		<code>
+			{% if object.mbgp_enabled %}
 			protocol bgp lutoma from dn42_peers {<br />
 			&nbsp;&nbsp;neighbor fe80::acab % 'wg.lutoma' as 64719;<br />
 			&nbsp;&nbsp;description "https://dn42.lutoma.org / hello@lutoma.org";<br />
 			};
+			{% else %}
+			protocol bgp lutoma_v4 from dn42_peers {<br />
+			&nbsp;&nbsp;neighbor {{object.router.ip_internal}} as 64719;<br />
+			&nbsp;&nbsp;description "https://dn42.lutoma.org / hello@lutoma.org";<br />
+			};<br />
+			<br />
+			protocol bgp lutoma_v6 from dn42_peers {<br />
+			&nbsp;&nbsp;neighbor fe80::acab % 'wg.lutoma' as 64719;<br />
+			&nbsp;&nbsp;description "https://dn42.lutoma.org / hello@lutoma.org";<br />
+			};
+			{% endif %}
 		</code>
+
+		<p class="mt-3">Please also consider setting <a href="https://dn42.eu/howto/Bird-communities">BGP communities</a> for bandwidth and latency.</p>
 	</div>
 </div>
+{% endwith %}
 {% endblock %}
