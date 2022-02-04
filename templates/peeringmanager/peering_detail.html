@@ -17,7 +17,7 @@
 		</div>
 
 		<div>
-			<a class='btn btn-secondary' href='https://stats.dn42.lutoma.org/detail.php?p=interface&amp;pi=wg.{{ peering.name }}&amp;t=if_octets&amp;h={{ peering.router.host_internal }}&amp;s=86400' target='_blank'>Traffic stats</a>
+			<a class='btn btn-secondary' href='https://stats.dn42.lutoma.org/detail.php?p=interface&amp;pi=wg.{{ peering.name }}&amp;t=if_octets&amp;h={{ peering.router.host_external }}&amp;s=86400' target='_blank'>Traffic stats</a>
 			<a class='btn btn-secondary' href='https://lg.dn42.lutoma.org/detail/{{ peering.router.lg_id }}/{{ peering.name }}' target='_blank'>Looking glass</a>
 			<a href='edit/' class='btn btn-primary'>Edit</a>
 		</div>
@@ -109,7 +109,7 @@
 		<h2 class='mb-2'>Traffic</h2>
 
 		{% if peering.get_traffic %}
-			<img src='https://stats.dn42.lutoma.org/graph.php?p=interface&amp;pi=wg.{{ peering.name }}&amp;t=if_octets&amp;h={{ peering.router.host_internal }}&amp;s=86400' />
+			<img src='https://stats.dn42.lutoma.org/graph.php?p=interface&amp;pi=wg.{{ peering.name }}&amp;t=if_octets&amp;h={{ peering.router.host_external }}&amp;s=86400' />
 		{% else %}
 			<em>Traffic stats are not yet available. Check back in 5-10 minutes.</em>
 		{% endif %}
