@@ -9,10 +9,15 @@
 <div class="row">
 	<div class="col-lg-6">
 		<h1>Sign up</h1>
+
+		<div class="alert alert-success mt-4" role="alert">
+			<i class="fa-regular fa-memo-circle-check"></i> Your maintainer object has been verified! Set a password and email address, and you're good to go.
+		</div>
+
 		<form method="post" action="">
 			{% csrf_token %}
 			{% bootstrap_form form %}
-			<input type="submit" value="{% trans 'Sign up' %}" class="btn btn-primary" />
+			<button type="submit" class="btn btn-primary" /><i class="fa-regular fa-user-plus"></i> {% trans 'Finish registration' %}</form>
 			<input type="hidden" name="next" value="{{ next }}" />
 		</form>
 	</div>

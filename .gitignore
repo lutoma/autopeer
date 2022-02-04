@@ -107,3 +107,5 @@ static/js
 static/fonts
 node_modules
 .npmrc
+
+autopeer/settings_local.py

@@ -65,9 +65,9 @@ class DN42VerificationView(FormView):
 			'email': form.cleaned_data['email']
 		}, settings.SECRET_KEY, algorithm='HS256')
 
-		send_email(form.cleaned_data['email'], 'login', {
+		send_email(form.cleaned_data['email'], 'verification', {
 			'name': form.cleaned_data['nick'],
-			'signin_link': f'https://dn42.lutoma.org/signup/finish/{jwt_data}'
+			'signin_link': f'https://dn42.lutoma.org/signup/finish/{jwt_data}/'
 		})
 
 		return super().form_valid(form)
@@ -75,6 +75,11 @@ class DN42VerificationView(FormView):
 
 class SignupForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())
+	password_confirmation = forms.CharField(widget=forms.PasswordInput())
+
+	def clean(self):
+		if self.cleaned_data['password'] != self.cleaned_data['password_confirmation']:
+			raise ValidationError({'password': '', 'password_confirmation': 'Passwords did not match.'})
 
 	def save(self, commit=True):
 		user = super().save(commit=False)
@@ -85,7 +90,7 @@ class SignupForm(forms.ModelForm):
 
 	class Meta:
 		model = DN42User
-		fields = ['email', 'password']
+		fields = ['email', 'password', 'password_confirmation']
 
 
 class DN42SignupView(CreateView):
