@@ -7,7 +7,7 @@
 	<div class='col-lg-12 d-flex justify-content-between'>
 		<div>
 			<h1>{{ peering.endpoint }}</h1>
-			<h4>{{ object.router.location }} / BGP state:
+			<h4>{{ object.router.flag_emoji }} {{ object.router.location }} / BGP state:
 				{% if status.state == 'Established' %}
 					<span class='text-success'>{{ status.state }}</span>
 				{% else %}
@@ -17,9 +17,9 @@
 		</div>
 
 		<div>
-			<a class='btn btn-secondary' href='https://stats.dn42.lutoma.org/detail.php?p=interface&amp;pi=wg.{{ peering.name }}&amp;t=if_octets&amp;h={{ peering.router.host_external }}&amp;s=86400' target='_blank'>Traffic stats</a>
-			<a class='btn btn-secondary' href='https://lg.dn42.lutoma.org/detail/{{ peering.router.lg_id }}/{{ peering.name }}' target='_blank'>Looking glass</a>
-			<a href='edit/' class='btn btn-primary'>Edit</a>
+			<a class='btn btn-secondary' href='https://stats.dn42.lutoma.org/detail.php?p=interface&amp;pi=wg.{{ peering.name }}&amp;t=if_octets&amp;h={{ peering.router.host_external }}&amp;s=86400' target='_blank'><i class="fa-regular fa-chart-area"></i> Traffic stats</a>
+			<a class='btn btn-secondary' href='https://lg.dn42.lutoma.org/detail/{{ peering.router.lg_id }}/{{ peering.name }}' target='_blank'><i class="fa-regular fa-magnifying-glass"></i> Looking glass</a>
+			<a href='edit/' class='btn btn-primary'><i class="fa-regular fa-pen-to-square"></i> Edit</a>
 		</div>
 	</div>
 
@@ -30,23 +30,23 @@
 				<table class='table'>
 					<tbody>
 						<tr>
-							<th scope='row'>ASN</th>
+							<th scope='row'><i class="fa-regular fa-hashtag"></i> ASN</th>
 							<td>64719</td>
 						</tr>
 						<tr>
-							<th scope='row'>Wireguard endpoint</th>
+							<th scope='row'><i class="fa-regular fa-bullseye-pointer"></i> Wireguard endpoint</th>
 							<td>{{ object.router.host_external }}:{{ object.wg_port }}</td>
 						</tr>
 						<tr>
-							<th scope='row'>Wireguard pubkey</th>
+							<th scope='row'><i class="fa-regular fa-key"></i> Wireguard pubkey</th>
 							<td><code>{{ object.wg_pubkey }}</code></td>
 						</tr>
 						<tr>
-							<th scope='row'>Internal IPv4</th>
+							<th scope='row'><i class="fa-regular fa-ethernet"></i> Internal IPv4</th>
 							<td>{{ object.router.ip_internal }}</td>
 						</tr>
 						<tr>
-							<th scope='row'>Link-local IPv6</th>
+							<th scope='row'><i class="fa-regular fa-ethernet"></i> Link-local IPv6</th>
 							<td>fe80::acab</td>
 						</tr>
 					</tbody>
@@ -63,23 +63,23 @@
 
 					<tbody>
 						<tr>
-							<th scope='row'>ASN</th>
+							<th scope='row'><i class="fa-regular fa-hashtag"></i> ASN</th>
 							<td>{{ object.asn }}</td>
 						</tr>
 						<tr>
-							<th scope='row'>Wireguard endpoint</th>
+							<th scope='row'><i class="fa-regular fa-bullseye-pointer"></i> Wireguard endpoint</th>
 							<td>{{ object.endpoint }}</td>
 						</tr>
 						<tr>
-							<th scope='row'>Wireguard pubkey</th>
+							<th scope='row'><i class="fa-regular fa-key"></i> Wireguard pubkey</th>
 							<td><code>{{ object.wg_peer_pubkey }}</code></td>
 						</tr>
 						<tr>
-							<th scope='row'>Internal IPv4</th>
+							<th scope='row'><i class="fa-regular fa-ethernet"></i> Internal IPv4</th>
 							<td>{{ object.endpoint_internal_v4 }}</td>
 						</tr>
 						<tr>
-							<th scope='row'>Link-local IPv6</th>
+							<th scope='row'><i class="fa-regular fa-ethernet"></i> Link-local IPv6</th>
 							<td>{{ object.endpoint_internal_v6 }}</td>
 						</tr>
 					</tbody>
@@ -87,10 +87,11 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-
-	<div class='col-lg-6 mt-3'>
-		<h2 class='mb-2'>Routes</h2>
+<div class="row mt-5">
+	<div class='col-lg-6'>
+		<h2 class='mb-2'><i class="fa-light fa-route"></i> Routes</h2>
 		{% if status %}
 			<table class='table'>
 				<tbody>
@@ -105,8 +106,8 @@
 
 	</div>
 
-	<div class='col-lg-6 mt-3'>
-		<h2 class='mb-2'>Traffic</h2>
+	<div class='col-lg-6'>
+		<h2 class='mb-2'><i class="fa-light fa-chart-area"></i> Traffic</h2>
 
 		{% if peering.get_traffic %}
 			<img src='https://stats.dn42.lutoma.org/graph.php?p=interface&amp;pi=wg.{{ peering.name }}&amp;t=if_octets&amp;h={{ peering.router.host_external }}&amp;s=86400' />
@@ -114,9 +115,11 @@
 			<em>Traffic stats are not yet available. Check back in 5-10 minutes.</em>
 		{% endif %}
 	</div>
+</div>
 
-	<div class='col-lg-12' style='margin-top: 2rem;'>
-		<h2>Example configurations</h2>
+<div class="row mt-5">
+	<div class='col-lg-12'>
+		<h2><i class="fa-light fa-file-binary"></i> Example configurations</h2>
 	</div>
 	<div class='col-lg-6' style='margin-top: .6rem;'>
 		<h3>wg-quick</h3>
