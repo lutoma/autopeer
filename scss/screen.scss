@@ -1,0 +1,15 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'fira';
+
+$fa-font-path: '../fonts';
+@import '@fortawesome/fontawesome-pro/scss/fontawesome';
+@import '@fortawesome/fontawesome-pro/scss/light';
+@import '@fortawesome/fontawesome-pro/scss/regular';
+@import '@fortawesome/fontawesome-pro/scss/solid';
+@import '@fortawesome/fontawesome-pro/scss/brands';
+@import '@fortawesome/fontawesome-pro/scss/duotone';
+
+body {
+	padding: 2rem 0;
+	font-family: 'Fira Sans', 'Open Sans', sans-serif;
+}

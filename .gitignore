@@ -101,3 +101,9 @@ ENV/
 .mypy_cache/
 
 db.sqlite3
+
+static/css
+static/js
+static/fonts
+node_modules
+.npmrc
