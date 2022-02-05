@@ -23,6 +23,9 @@ class VerificationForm(forms.Form):
 		self.cleaned_data['name'] = self.cleaned_data['name'].upper()
 		name = self.cleaned_data['name']
 
+		if DN42User.objects.filter(dn42_mntner=name).exists():
+			raise ValidationError({'name': 'This maintainer object is already registered with an account. Ping lutoma if you have forgotten your login details.'})
+
 		mntner = whois_query(name)
 		if not mntner:
 			raise ValidationError({'name': 'Could not find an object by this name in the registry. If you only just registered it, try waiting a bit until caches have cleared.'})
