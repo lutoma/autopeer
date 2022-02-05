@@ -7,6 +7,7 @@ from autopeer.email import send_email
 from django.contrib.auth import login
 from django.conf import settings
 from dn42auth.models import DN42User
+from autopeer.mixins import AuthenticatedRedirectMixin
 from django import forms
 import jwt
 
@@ -56,7 +57,7 @@ class VerificationForm(forms.Form):
 		return super().clean()
 
 
-class DN42VerificationView(FormView):
+class DN42VerificationView(AuthenticatedRedirectMixin, FormView):
 	template_name = 'dn42auth/signup.html'
 	form_class = VerificationForm
 	success_url = '/signup/sent/'
@@ -96,7 +97,7 @@ class SignupForm(forms.ModelForm):
 		fields = ['email', 'password', 'password_confirmation']
 
 
-class DN42SignupView(CreateView):
+class DN42SignupView(AuthenticatedRedirectMixin, CreateView):
 	template_name = 'dn42auth/signup_auth.html'
 	form_class = SignupForm
 	success_url = '/peerings/'

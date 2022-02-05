@@ -2,9 +2,11 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic import TemplateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
+from autopeer.mixins import AuthenticatedRedirectMixin
 from django import forms
 from subprocess import Popen, PIPE
 from .models import Peering, Router
@@ -13,6 +15,10 @@ from io import StringIO
 import fabric
 import json
 import re
+
+
+class IndexView(AuthenticatedRedirectMixin, TemplateView):
+	template_name = 'index.html'
 
 
 @method_decorator(login_required, name='dispatch')
