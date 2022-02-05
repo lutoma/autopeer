@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
@@ -22,5 +22,7 @@ urlpatterns = [
 
 	path('signup/', DN42VerificationView.as_view(), name='signup-verification'),
 	path('signup/finish/<str:jwt>/', DN42SignupView.as_view(), name='signup-auth'),
+
+	path('admin/', include('loginas.urls')),
 	path('admin/', admin.site.urls),
 ]

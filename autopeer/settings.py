@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'dn42auth',
     'peeringmanager',
     'bootstrap5',
+    'loginas',
 ]
 
 MIDDLEWARE = [

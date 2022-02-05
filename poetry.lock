@@ -122,6 +122,14 @@ django = ">=2.2,<5.0"
 docs = ["sphinx (>=2.4,<3.0)", "sphinx_rtd_theme (>=0.4.3,<0.5.0)", "m2r2 (>=0.2.5,<0.3.0)"]
 
 [[package]]
+name = "django-loginas"
+version = "0.3.10"
+description = "An app to add a \"Log in as user\" button in the Django user admin page."
+category = "main"
+optional = false
+python-versions = ">3.3"
+
+[[package]]
 name = "fabric"
 version = "2.6.0"
 description = "High level SSH command execution"
@@ -321,7 +329,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "4708f19f6dcd3f8253b443766af67350e0eeb9cc58939ed5c05c669b48a8ed6d"
+content-hash = "22fcee262a147bac4903a934794b3fa568817c630276c298a257657df315b3cf"
 
 [metadata.files]
 asgiref = [
@@ -433,6 +441,10 @@ django = [
 django-bootstrap-v5 = [
     {file = "django-bootstrap-v5-1.0.8.tar.gz", hash = "sha256:c366d761b5ce2124448c81d12f1a22c0519a664def46d28efd016f83b7683ea9"},
     {file = "django_bootstrap_v5-1.0.8-py3-none-any.whl", hash = "sha256:220d905c2d64d25bdb1b53a20c5b1ba36c566e322fc310a11f66ac0e9cf466bc"},
+]
+django-loginas = [
+    {file = "django-loginas-0.3.10.tar.gz", hash = "sha256:8d81f31d993b3c3c9f9018b385bfbdf74ead320e0a4b18493141d0e2dbc8ad6b"},
+    {file = "django_loginas-0.3.10-py2.py3-none-any.whl", hash = "sha256:2d609ddcc68ff840b3e59baa58ac58b870cd1aef491aaab8cd796d022d961c40"},
 ]
 fabric = [
     {file = "fabric-2.6.0-py2.py3-none-any.whl", hash = "sha256:7a71714b8b8f28cf828eceb155196f43ebac1bd4c849b7161ed5993d1cbcaa40"},
