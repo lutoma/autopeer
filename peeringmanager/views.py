@@ -47,6 +47,7 @@ class PeeringForm(forms.ModelForm):
 		instance = getattr(self, 'instance', None)
 		if instance and instance.pk:
 			self.fields['router'].disabled = True
+			self.fields['name'].disabled = True
 
 	def clean_name(self):
 		if not re.match(r'^[a-zA-Z0-9]+$', self.cleaned_data['name']):
