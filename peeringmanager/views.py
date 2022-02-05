@@ -104,10 +104,10 @@ class PeeringMixin:
 		fields = ['id', 'asn', 'endpoint', 'endpoint_internal_v4', 'endpoint_internal_v6', 'mbgp_enabled',
 			'bandwidth_community', 'wg_privkey', 'wg_peer_pubkey', 'wg_port', 'name']
 
-		data = map(lambda c: (c, getattr(form.instance, c)), fields)
-		data = json.dumps(dict(data))
-		data_stream = StringIO(data)
+		data = dict(map(lambda c: (c, getattr(form.instance, c)), fields))
+		data['router_endpoint_internal_v4'] = form.instance.router.ip_internal
 
+		data_stream = StringIO(json.dumps(data))
 		ssh_host = form.instance.router.host_external
 		print(f'Connecting to {ssh_host} to update peering #{form.instance.id}')
 
