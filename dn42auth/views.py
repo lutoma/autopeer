@@ -8,6 +8,7 @@ from django.contrib.auth import login
 from django.conf import settings
 from dn42auth.models import DN42User
 from autopeer.mixins import AuthenticatedRedirectMixin
+from peeringmanager.models import Peering
 from django import forms
 import jwt
 import re
@@ -137,5 +138,9 @@ class DN42SignupView(AuthenticatedRedirectMixin, CreateView):
 	def form_valid(self, form):
 		form.instance.dn42_mntner = self.jwt_data['name']
 		r = super().form_valid(form)
+
+		# Assign any existing peerings with this mntner to the user
+		Peering.objects.filter(mntner=self.jwt_data['name']).update(owner=form.instance)
+
 		login(self.request, form.instance)
 		return r
