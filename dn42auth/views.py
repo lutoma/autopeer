@@ -10,6 +10,7 @@ from dn42auth.models import DN42User
 from autopeer.mixins import AuthenticatedRedirectMixin
 from django import forms
 import jwt
+import re
 
 
 class VerificationForm(forms.Form):
@@ -42,10 +43,28 @@ class VerificationForm(forms.Form):
 		if not adminc:
 			raise ValidationError({'name': f'Could not find the admin-c object {adminc_name} listed in the mntner.'})
 
-		if 'e-mail' not in adminc:
-			raise ValidationError({'name': f'The admin-c object {adminc_name} does not seem to have the e-mail property set.'})
+		if 'e-mail' in adminc:
+			self.cleaned_data['email'] = adminc['e-mail'][0]
+		else:
+			# Try to find an email in the contact properties
+			contact_methods = adminc['contact']
 
-		self.cleaned_data['email'] = adminc['e-mail'][0]
+			for contact in contact_methods:
+				# Look for something that could be an email - Does not match
+				# all RFC compliant addresses but this is a fallback anyway
+				sr = re.search(r'([^:@ \t]+@[-\.a-z0-9]+\.[-\.a-z0-9]+).*', contact, re.IGNORECASE)
+				if sr:
+					email = sr.group(1)
+
+					# Some people have their irc nicks in a "nick@irc.hackint.org" format, filter those
+					if 'irc' in email or 'hackint' in email:
+						continue
+
+					self.cleaned_data['email'] = email
+					break
+
+			if 'email' not in self.cleaned_data:
+				raise ValidationError({'name': f'The admin-c object {adminc_name} does not seem to contain an email address.'})
 
 		if 'nick' in adminc:
 			self.cleaned_data['nick'] = adminc['nick'][0]
