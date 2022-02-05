@@ -43,6 +43,11 @@ class PeeringForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		self.fields['router'].queryset = Router.objects.filter(active=True)
 
+		# Changing the router after creation is not permitted
+		instance = getattr(self, 'instance', None)
+		if instance and instance.pk:
+			self.fields['router'].disabled = True
+
 	def clean_name(self):
 		if not re.match(r'^[a-zA-Z0-9]+$', self.cleaned_data['name']):
 			raise ValidationError(_('Name contains illegal characters'))
