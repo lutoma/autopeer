@@ -12,6 +12,7 @@
 
 		<form class="mt-4" method="post" action="">
 			{% csrf_token %}
+			{% bootstrap_form_errors form %}
 
 			<div class="form-floating mb-3">
 				{% if form.email.errors %}
