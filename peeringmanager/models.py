@@ -42,7 +42,7 @@ class Peering(models.Model):
 	owner = models.ForeignKey(DN42User, verbose_name=_('Owner'),
 		on_delete=models.SET_NULL, null=True, blank=True)
 
-	mntner = models.CharField(_('Maintainer object'), max_length=200, unique=True)
+	mntner = models.CharField(_('Maintainer object'), max_length=200)
 
 	asn = models.BigIntegerField(verbose_name=_('AS Number'),
 		help_text=_('Your maintainer object must be listed as mnt-by for the AS'))
