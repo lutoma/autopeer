@@ -127,7 +127,7 @@
 			[Interface]<br />
 			ListenPort = {{object.endpoint_port}}<br />
 			PrivateKey = <em>replace me</em><br />
-			PostUp = /sbin/ip addr add dev %i 172.22.119.1/32 peer {{object.endpoint_internal_v4}}/32<br />
+			PostUp = /sbin/ip addr add dev %i {{object.endpoint_internal_v4}}/32 peer {{object.router.ip_internal}}/32<br />
 			PostUp = /sbin/ip addr add dev %i {{object.endpoint_internal_v6}}/128 peer fe80::acab/128<br />
 			Table = off<br />
 			<br />
