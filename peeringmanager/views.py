@@ -37,6 +37,11 @@ class PeeringForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		self.fields['router'].queryset = Router.objects.filter(active=True)
 
+	def clean_name(self):
+		if not re.match(r'^[a-zA-Z0-9]+$', self.cleaned_data['name']):
+			raise ValidationError(_('Name contains illegal characters'))
+		return self.cleaned_data['name'].lower()
+
 	def clean_asn(self):
 		mntby = get_whois_field(f'AS{self.cleaned_data["asn"]}', 'mnt-by')
 		if not mntby or self.user.dn42_mntner not in mntby:
@@ -47,7 +52,7 @@ class PeeringForm(forms.ModelForm):
 	def clean_endpoint_internal_v4(self):
 		mntby = get_whois_field(self.cleaned_data['endpoint_internal_v4'], 'mnt-by')
 		if self.user.dn42_mntner not in mntby:
-			raise ValidationError(_('User is not listed as mnt-by for the internal router IP'))
+			raise ValidationError(_('User is not listed as mnt-by for this IP'))
 
 		return self.cleaned_data['endpoint_internal_v4']
 
