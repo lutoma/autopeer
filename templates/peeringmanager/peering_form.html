@@ -3,13 +3,15 @@
 
 {% block content %}
 <div class='row'>
-	<div class='col-lg-6'>
+	<div class='col-lg-12'>
 		{% if request.resolver_match.url_name == 'peerings-edit' %}
 			<h1>Edit peering with {{ peering.endpoint }}</h1>
 		{% else %}
 			<h1>Create peering</h1>
 		{% endif %}
+	</div>
 
+	<div class='col-lg-6'>
 		<form method='POST'>
 			{% csrf_token %}
 			{% bootstrap_form_errors form %}
