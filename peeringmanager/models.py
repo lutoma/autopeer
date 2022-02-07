@@ -70,8 +70,8 @@ class Peering(models.Model):
 		verbose_name=_('Link bandwidth'),
 		help_text=_('Used to set <a href="https://dn42.eu/howto/Bird-communities">BGP communities</a>'))
 
-	name = models.CharField(max_length=25, verbose_name=_('Peering name'),
-		help_text=_('A human-readable name for this peering. Usually your nickname or a network name. Used for the Wireguard interface name, in the looking glass, and similar places. Lowercase ASCII only, max. 25 chars.'))
+	name = models.CharField(max_length=12, verbose_name=_('Peering name'),
+		help_text=_('A human-readable name for this peering. Usually your nickname or a network name. Used for the Wireguard interface name, in the looking glass, and similar places. Lowercase ASCII only, max. 12 chars.'))
 
 	wg_privkey = models.CharField(max_length=150, verbose_name=_('Wireguard private key'))
 	wg_pubkey = models.CharField(max_length=150, verbose_name=_('Wireguard public key'))
