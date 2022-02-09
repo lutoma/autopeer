@@ -3,190 +3,208 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-09 00:53+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2022-02-09 01:20+0000\n"
+"Last-Translator: lutoma <hello@lutoma.org>\n"
+"Language-Team: German <http://weblate.ohai.su/projects/autopeer/django/de/>\n"
+"Language: de_de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.10.1\n"
 
 #: dn42auth/models.py:41
 msgid "email address"
-msgstr ""
+msgstr "E-Mail-Adresse"
 
 #: dn42auth/models.py:42
 msgid "DN42 maintainer object"
-msgstr ""
+msgstr "DN42 Maintainer-Objekt"
 
 #: dn42auth/views.py:18 templates/dn42auth/signup.html:25
 msgid "Maintainer"
-msgstr ""
+msgstr "Maintainer"
 
 #: dn42auth/views.py:20 templates/dn42auth/signup.html:26
 msgid ""
 "Please enter your mntner object as it exists in the DN42 registry, including "
 "the -MNT suffix."
 msgstr ""
+"Bitte gib dein mtner Objekt so ein wie esin der DN42-Registry existiert - "
+"inklusive -MNT-Suffix."
 
 #: dn42auth/views.py:30
 msgid ""
 "This maintainer object is already registered with an account. Ping lutoma if "
 "you have forgotten your login details."
 msgstr ""
+"Dieses Maintainer-Objekt ist bereits mit einem Account verknüpft. Pinge "
+"lutoma an falls du deine Logindaten vergessen hast."
 
 #: dn42auth/views.py:34
 msgid ""
 "Could not find an object by this name in the registry. If you only just "
 "registered it, try waiting a bit until caches have cleared."
 msgstr ""
+"Konnte kein Objekt mit diesem Namen in der Registry finden. Falls du es "
+"gerade erst registriert hast solltest du noch ein bisschen warten bis sich "
+"die Caches aktualisiert haben."
 
 #: dn42auth/views.py:37
 msgid ""
 "An object with this name exists in the registry, but it does not seem to be "
 "a mntner."
 msgstr ""
+"Ein Objekt mit diesem Namen existiert in der Registry, aber es scheint kein "
+"mntner zu sein."
 
 #: dn42auth/views.py:40
 msgid "This mntner object does not seem to have an admin-c set."
-msgstr ""
+msgstr "Dieses mntner-Objekt scheint keinen admin-c gesetzt zu haben."
 
 #: dn42auth/views.py:45
 msgid "Could not find the admin-c object {} that is listed in the mntner."
-msgstr ""
+msgstr "Konnte das admin-c-Ojekt {}, welches im mntner steht, nicht finden."
 
 #: dn42auth/views.py:68
 msgid "The admin-c object {} does not seem to contain an email address."
 msgstr ""
+"Das admin-c-Objekt {} scheint keine gültige E-Mail-Adresse zu enthalten."
 
 #: dn42auth/views.py:106
 msgid "Passwords did not match."
-msgstr ""
+msgstr "Passwörter stimmen nicht überein."
 
 #: peeringmanager/models.py:11
 msgid "Location"
-msgstr ""
+msgstr "Ort"
 
 #: peeringmanager/models.py:12
 msgid "External host"
-msgstr ""
+msgstr "Externer Host"
 
 #: peeringmanager/models.py:13
 msgid "Internal host"
-msgstr ""
+msgstr "Interner Host"
 
 #: peeringmanager/models.py:14
 msgid "Internal IP"
-msgstr ""
+msgstr "Interne IP"
 
 #: peeringmanager/models.py:15
 msgid "Location flag emoji"
-msgstr ""
+msgstr "Ortsflaggen-Emoji"
 
 #: peeringmanager/models.py:16
 msgid "Last allocated wireguard port"
-msgstr ""
+msgstr "Zuletzt zugewiesener Wireguard-Port"
 
 #: peeringmanager/models.py:17
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #: peeringmanager/models.py:18
 msgid "Users can only create peerings to active routers"
-msgstr ""
+msgstr "Nutzer*innen können nur Peerings zu aktiven Routern anlegen"
 
 #: peeringmanager/models.py:20
 msgid "Looking Glass ID"
-msgstr ""
+msgstr "Looking Glass-ID"
 
 #: peeringmanager/models.py:39
 msgid "Wireguard"
-msgstr ""
+msgstr "Wireguard"
 
 #: peeringmanager/models.py:42
 msgid "Owner"
-msgstr ""
+msgstr "Besitzer*in"
 
 #: peeringmanager/models.py:45
 msgid "Maintainer object"
-msgstr ""
+msgstr "Maintainer-Objekt"
 
 #: peeringmanager/models.py:47
 msgid "AS Number"
-msgstr ""
+msgstr "AS-Nummer"
 
 #: peeringmanager/models.py:48
 msgid "Your maintainer object must be listed as mnt-by for the AS"
-msgstr ""
+msgstr "Dein Maintainer-Objekt muss für das AS als mnt-by gelistet sein"
 
 #: peeringmanager/models.py:51
 msgid "VPN type"
-msgstr ""
+msgstr "VPN-Typ"
 
 #: peeringmanager/models.py:52
 msgid ""
 "Peering is also possible using OpenVPN/GRE/…, but only with manual setup for "
 "now."
 msgstr ""
+"Peering ist auch über OpenVPN/GRE/... möglich, aber fürs erste nur mit "
+"manuellem Setup."
 
 #: peeringmanager/models.py:54 templates/peeringmanager/peering_detail.html:38
 #: templates/peeringmanager/peering_detail.html:71
 msgid "Wireguard endpoint"
-msgstr ""
+msgstr "Wireguard-Endpoint"
 
 #: peeringmanager/models.py:55
 msgid "Hostname/IP and port, e.g. example.org:1234, 127.0.0.1:1234, [::1]:1234"
-msgstr ""
+msgstr "Hostname und Port, z.B. example.org:1234, 127.0.0.1:1234, [::1]:1234"
 
 #: peeringmanager/models.py:58
 msgid "Internal IPv4 address"
-msgstr ""
+msgstr "Interne IPv4-Adresse"
 
 #: peeringmanager/models.py:59
 msgid "Internal DN42 address of your router"
-msgstr ""
+msgstr "Interne DN42-Adresse deines Routers"
 
 #: peeringmanager/models.py:62
 msgid "Link-local IPv6 address"
-msgstr ""
+msgstr "Link-local IPv6-Adresse"
 
 #: peeringmanager/models.py:63
 msgid "Link-local IPv6 address of your router"
-msgstr ""
+msgstr "Link-local IPv6-Addresse deines Routers"
 
 #: peeringmanager/models.py:65
 msgid "Multi-protocol BGP over IPv6"
-msgstr ""
+msgstr "Multi-protocol BGP über IPv6"
 
 #: peeringmanager/models.py:66
 msgid ""
 "If set, the router will establish a Multi-protocol session for both IPv4 and "
 "IPv6 over the IPv6 link-local address (RFC 4760)"
 msgstr ""
+"Falls gesetzt, wird der Router eine Multi-protocol session über die IPv6 "
+"link-local-Adresse aufbauen, die sowohl für IPv6 als auch IPv4 genutzt wird ("
+"RFC 4760)"
 
 #: peeringmanager/models.py:68 templates/peeringmanager/peering_list.html:19
 msgid "Router"
-msgstr ""
+msgstr "Router"
 
 #: peeringmanager/models.py:70
 msgid "Link bandwidth"
-msgstr ""
+msgstr "Link-Bandbreite"
 
 #: peeringmanager/models.py:71
 msgid ""
 "Used to set <a href=\"https://dn42.eu/howto/Bird-communities\">BGP "
 "communities</a>"
 msgstr ""
+"Wird genutzt um <a href=\"https://dn42.eu/howto/Bird-communities\">BGP-"
+"Communities</a> zu setzen"
 
 #: peeringmanager/models.py:73
 msgid "Peering name"
-msgstr ""
+msgstr "Peeringname"
 
 #: peeringmanager/models.py:74
 msgid ""
@@ -194,80 +212,88 @@ msgid ""
 "name. Used for the Wireguard interface name, in the looking glass, and "
 "similar places. Lowercase ASCII only, max. 12 chars."
 msgstr ""
+"Ein für Menschen lesbarer Name für dieses Peerings. Üblicherweise dein "
+"Nickname oder ein Netzwerkname. Wird für den Namen des Wireguard-Interface, "
+"im Looking Glass und ähnlichen Orten genutzt. Nur ASCII-Kleinbuchstaben, "
+"max. 12 Buchstaben."
 
 #: peeringmanager/models.py:76
 msgid "Wireguard private key"
-msgstr ""
+msgstr "Wireguard Private Key"
 
 #: peeringmanager/models.py:77 peeringmanager/models.py:78
 msgid "Wireguard public key"
-msgstr ""
+msgstr "Wireguard Public Key"
 
 #: peeringmanager/models.py:79
 msgid ""
 "See <a href='https://www.wireguard.com/quickstart/#key-generation'>Wireguard "
 "manual</a> on how to generate the keys"
 msgstr ""
+"Details zur Keyerstellung im <a href='https://www.wireguard.com/quickstart/"
+"#key-generation'>Wireguard-Handbuch</a>"
 
 #: peeringmanager/models.py:81
 msgid "Wireguard port"
-msgstr ""
+msgstr "Wireguard-Port"
 
 #: peeringmanager/models.py:148
 msgid "Peering"
-msgstr ""
+msgstr "Peering"
 
 #: peeringmanager/models.py:149 templates/base.html:19
 msgid "Peerings"
-msgstr ""
+msgstr "Peerings"
 
 #: peeringmanager/views.py:54
 msgid "Name contains illegal characters"
-msgstr ""
+msgstr "Name enthält ungültige Buchstaben"
 
 #: peeringmanager/views.py:60
 msgid "AS does not exist or user is not listed as mnt-by for this AS"
 msgstr ""
+"AS existiert nicht oder Nutzer*in ist für dieses AS nicht als mnt-by "
+"aufgeführt"
 
 #: peeringmanager/views.py:67
 msgid "User is not listed as mnt-by for this IP"
-msgstr ""
+msgstr "Nutzer*in ist für diese IP nicht als mnt-by aufgeführt"
 
 #: peeringmanager/views.py:73
 msgid "Endpoint doesn't seem to be valid IP/hostname:port combo"
-msgstr ""
+msgstr "Endpoint scheint keine gültige IP/hostname:port-Kombination zu sein"
 
 #: peeringmanager/views.py:79
 msgid "Wireguard public key has invalid length"
-msgstr ""
+msgstr "Wireguard-Public Key hat eine ungültige Länge"
 
 #: peeringmanager/whois.py:12
 msgid "Could not connect to dn42 whois servers."
-msgstr ""
+msgstr "Konnte keine Verbindung zu den dn42-Whois-Servern herstellen."
 
 #: templates/base.html:10
 msgid "AS64719 peering portal"
-msgstr ""
+msgstr "AS64719 Peeringportal"
 
 #: templates/base.html:21
 msgid "Home"
-msgstr ""
+msgstr "Start"
 
 #: templates/base.html:27 templates/index.html:16
 #: templates/registration/login.html:6 templates/registration/login.html:11
 #: templates/registration/login.html:38
 msgid "Log in"
-msgstr ""
+msgstr "Anmelden"
 
 #: templates/base.html:28 templates/dn42auth/signup.html:6
 #: templates/dn42auth/signup_auth.html:6 templates/dn42auth/signup_sent.html:6
 #: templates/index.html:15
 msgid "Sign up"
-msgstr ""
+msgstr "Registrieren"
 
 #: templates/base.html:30
 msgid "Log out"
-msgstr ""
+msgstr "Abmelden"
 
 #: templates/dn42auth/signup.html:15
 msgid ""
@@ -275,16 +301,22 @@ msgid ""
 "verify your <em>Maintainer</em> object from the DN42 registry (e.g. "
 "<code>FOOBAR-MNT</code>)."
 msgstr ""
+"Falls du den automatischen Peering-Service zum ersten mal benutzt, musst du "
+"dein <em>Maintainer</em>-Objekt aus der DN42-Registry verifizieren (z.B. "
+"<code>FOOBAR-MNT</code>)."
 
 #: templates/dn42auth/signup.html:16
 msgid ""
 "After submitting this form, you will receive an email with a signup link to "
 "the email address of the listed <code>admin-c</code> contact."
 msgstr ""
+"Nachdem du das Formular abgeschickt hast, wirst du eine E-Mail mit einem "
+"Anmeldungslink an die E-Mail-Adresse des aufgeführten <code>admin-c</code>-"
+"Kontakts erhalten."
 
 #: templates/dn42auth/signup.html:29
 msgid "Get verification link"
-msgstr ""
+msgstr "Verifikationslink anfordern"
 
 #: templates/dn42auth/signup_auth.html:14
 msgid ""
@@ -323,154 +355,160 @@ msgid ""
 "Welcome! This service will allow you to automatically establish and manage "
 "DN42 peerings with AS64719 over Wireguard."
 msgstr ""
+"Hallo! Dieses Portal ermöglicht es dir automatisch DN42-Peerings mit AS64719 "
+"über Wireguard anzulegen und zu verwalten."
 
 #: templates/peeringmanager/peering_detail.html:11
 msgid "BGP state:"
-msgstr ""
+msgstr "BGP-Status:"
 
 #: templates/peeringmanager/peering_detail.html:21
 msgid "Traffic stats"
-msgstr ""
+msgstr "Trafficstatistiken"
 
 #: templates/peeringmanager/peering_detail.html:22
 msgid "Looking glass"
-msgstr ""
+msgstr "Looking Glass"
 
 #: templates/peeringmanager/peering_detail.html:23
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 #: templates/peeringmanager/peering_detail.html:30
 msgid "My side"
-msgstr ""
+msgstr "Meine Seite"
 
 #: templates/peeringmanager/peering_detail.html:34
 #: templates/peeringmanager/peering_detail.html:67
 #: templates/peeringmanager/peering_list.html:17
 msgid "ASN"
-msgstr ""
+msgstr "ASN"
 
 #: templates/peeringmanager/peering_detail.html:42
 #: templates/peeringmanager/peering_detail.html:75
 msgid "Wireguard pubkey"
-msgstr ""
+msgstr "Wireguard-Pubkey"
 
 #: templates/peeringmanager/peering_detail.html:46
 #: templates/peeringmanager/peering_detail.html:79
 msgid "Internal IPv4"
-msgstr ""
+msgstr "Internes IPv4"
 
 #: templates/peeringmanager/peering_detail.html:50
 #: templates/peeringmanager/peering_detail.html:83
 msgid "Link-local IPv6"
-msgstr ""
+msgstr "Link-local IPv6"
 
 #: templates/peeringmanager/peering_detail.html:62
 msgid "Your side"
-msgstr ""
+msgstr "Deine Seite"
 
 #: templates/peeringmanager/peering_detail.html:95
 msgid "Routes"
-msgstr ""
+msgstr "Routen"
 
 #: templates/peeringmanager/peering_detail.html:99
 msgid "Received routes"
-msgstr ""
+msgstr "Empfangene Routen"
 
 #: templates/peeringmanager/peering_detail.html:100
 msgid "Primary routes"
-msgstr ""
+msgstr "Primäre Routen"
 
 #: templates/peeringmanager/peering_detail.html:101
 msgid "Filtered routes"
-msgstr ""
+msgstr "Gefilterte Routen"
 
 #: templates/peeringmanager/peering_detail.html:111
 msgid "Traffic"
-msgstr ""
+msgstr "Traffic"
 
 #: templates/peeringmanager/peering_detail.html:116
 msgid "Traffic stats are not yet available. Check back in 5-10 minutes."
 msgstr ""
+"Trafficstatistiken sind noch nicht verfügbar. Schaue in 5-10 Minuten noch "
+"mal vorbei."
 
 #: templates/peeringmanager/peering_detail.html:123
 msgid "Example configurations"
-msgstr ""
+msgstr "Beispielkonfigurationen"
 
 #: templates/peeringmanager/peering_detail.html:162
 msgid ""
 "Please also consider setting <a href=\"https://dn42.eu/howto/Bird-communities"
 "\">BGP communities</a> for bandwidth and latency."
 msgstr ""
+"Bitte erwäge auch <a href=\"https://dn42.eu/howto/Bird-communities\">BGP-"
+"Communities</a> für Bandbreite und Latenz zu setzen."
 
 #: templates/peeringmanager/peering_form.html:9
 #, python-format
 msgid "Edit peering with %(endpoint)s"
-msgstr ""
+msgstr "Peering mit %(endpoint)s bearbeiten"
 
 #: templates/peeringmanager/peering_form.html:11
 #: templates/peeringmanager/peering_form.html:51
 #: templates/peeringmanager/peering_list.html:9
 msgid "Create peering"
-msgstr ""
+msgstr "Neues Peering"
 
 #: templates/peeringmanager/peering_form.html:22
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: templates/peeringmanager/peering_form.html:30
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 #: templates/peeringmanager/peering_form.html:39
 msgid "BGP"
-msgstr ""
+msgstr "BGP"
 
 #: templates/peeringmanager/peering_form.html:49
 msgid "Update peering"
-msgstr ""
+msgstr "Peering aktualisieren"
 
 #: templates/peeringmanager/peering_list.html:18
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #: templates/peeringmanager/peering_list.html:20
 msgid "Endpoint"
-msgstr ""
+msgstr "Endpoint"
 
 #: templates/peeringmanager/peering_list.html:21
 msgid "Routes IPv4"
-msgstr ""
+msgstr "IPv4-Routen"
 
 #: templates/peeringmanager/peering_list.html:22
 msgid "Routes IPv6"
-msgstr ""
+msgstr "IPv6-Routen"
 
 #: templates/peeringmanager/peering_list.html:23
 msgid "Traffic avg."
-msgstr ""
+msgstr "Traffic"
 
 #: templates/peeringmanager/peering_list.html:38
 msgid "since"
-msgstr ""
+msgstr "seit"
 
 #: templates/peeringmanager/peering_list.html:54
 #: templates/peeringmanager/peering_list.html:63
 #: templates/peeringmanager/peering_list.html:73
 msgid "Not available"
-msgstr ""
+msgstr "Nicht verfügbar"
 
 #: templates/peeringmanager/peering_list.html:70
 msgid "Receive:"
-msgstr ""
+msgstr "Empfang:"
 
 #: templates/peeringmanager/peering_list.html:71
 msgid "Transmit:"
-msgstr ""
+msgstr "Senden:"
 
 #: templates/peeringmanager/peering_list.html:78
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: templates/peeringmanager/peering_list.html:86
 msgid "You don\\"
@@ -478,7 +516,7 @@ msgstr ""
 
 #: templates/peeringmanager/peering_list.html:86
 msgid "Create one!"
-msgstr ""
+msgstr "Lege eines an!"
 
 #: templates/peeringmanager/peering_list.html:90
 msgid ""
@@ -492,16 +530,16 @@ msgstr ""
 
 #: templates/registration/logged_out.html:11
 msgid "Bye!"
-msgstr ""
+msgstr "Tschüss!"
 
 #: templates/registration/logged_out.html:12
 msgid "You have succesfully been logged out."
-msgstr ""
+msgstr "Du wurdest erfolgreich abgemeldet."
 
 #: templates/registration/login.html:24
 msgid "Email address"
-msgstr ""
+msgstr "E-Mail-Adresse"
 
 #: templates/registration/login.html:34
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
