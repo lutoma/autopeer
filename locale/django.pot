@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-09 02:30+0000\n"
+"POT-Creation-Date: 2022-02-09 02:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -482,12 +482,6 @@ msgstr ""
 
 #: templates/peeringmanager/peering_list.html:86
 msgid "Create one!"
-msgstr ""
-
-#: templates/peeringmanager/peering_list.html:90
-msgid ""
-"If you need additional custom settings for your peering or something is "
-"broken, feel free to <a href=\"https://lutoma.org/contact\">contact me</a>."
 msgstr ""
 
 #: templates/registration/logged_out.html:6
