@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 
+from .views import switch_language
 from dn42auth.views import DN42VerificationView, DN42SignupView
 from peeringmanager.views import (
 	IndexView, PeeringView, PeeringDetailView, UpdatePeeringView, CreatePeeringView
@@ -22,6 +23,8 @@ urlpatterns = [
 
 	path('signup/', DN42VerificationView.as_view(), name='signup-verification'),
 	path('signup/finish/<str:jwt>/', DN42SignupView.as_view(), name='signup-auth'),
+
+	path('i18n/setlang/<slug:language>/', switch_language, name='switch-language'),
 
 	path('admin/', include('loginas.urls')),
 	path('admin/', admin.site.urls),

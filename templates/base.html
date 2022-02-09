@@ -1,8 +1,10 @@
 {% load i18n %}
 {% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
 
 <!doctype html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,29 +12,52 @@
 		<title>{% block title %}{% trans 'AS64719 peering portal' %}{% endblock %}</title>
 	</head>
 	<body class="pt-0">
-		<header class="p-3 mb-5 bg-dark text-white">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white p-3 mb-5">
 			<div class="container">
-				<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-					<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+				<a class="navbar-brand" href="/">dn42.lutoma.org</a>
 
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarInner" aria-controls="navbarInner" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarInner">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						{% if user.is_authenticated %}
-							<li><a href="/peerings/" class="nav-link px-2 text-white">{% trans 'Peerings' %}</a></li>
+							<li class="nav-item"><a href="/peerings/" class="nav-link px-2 text-white">{% trans 'Peerings' %}</a></li>
 						{% else %}
-							<li><a href="/" class="nav-link px-2 text-white">{% trans 'Home' %}</a></li>
+							<li class="nav-item"><a href="/" class="nav-link px-2 text-white">{% trans 'Home' %}</a></li>
 						{% endif %}
+
 					</ul>
 
-					<div class="text-end">
+
+					<ul class="navbar-nav mb-2 mb-lg-0">
+						<li class="nav-item dropdown me-4">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fa-regular fa-language"></i> {{ LANGUAGE_CODE|language_name_local }}
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								{% for lang_code, lang_name in LANGUAGES %}
+									{% if lang_code != LANGUAGE_CODE %}
+										{% get_language_info for lang_code as lang_info %}
+										{% language lang_code %}
+											<li><a class="dropdown-item" href="{% url 'switch-language' language=lang_code %}">{{ lang_info.name_local }}</a></li>
+										{% endlanguage %}
+									{% endif %}
+								{% endfor %}
+							</ul>
+						</li>
+
 						{% if not user.is_authenticated %}
-							<a href="/login/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-to-bracket"></i> {% trans 'Log in' %}</a>
-							<a href="/signup/" class="btn btn-warning"><i class="fa-regular fa-user-plus"></i>  {% trans 'Sign up' %}</a>
+							<li class="nav-item"><a href="/login/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-to-bracket"></i> {% trans 'Log in' %}</a></li>
+							<li class="nav-item"><a href="/signup/" class="btn btn-warning"><i class="fa-regular fa-user-plus"></i>  {% trans 'Sign up' %}</a></li>
 						{% else %}
-							<a href="/logout/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-from-bracket"></i> {% trans 'Log out' %}</a>
+							<li class="nav-item"><a href="/logout/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-from-bracket"></i> {% trans 'Log out' %}</a></li>
 						{% endif %}
-					</div>
+					</ul>
 				</div>
 			</div>
-		</header>
+		</nav>
 
 	    <div class="container">
 			{% block content %}
