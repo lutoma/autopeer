@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-09 02:26+0000\n"
+"POT-Creation-Date: 2022-02-09 02:30+0000\n"
 "PO-Revision-Date: 2022-02-09 01:20+0000\n"
 "Last-Translator: lutoma <hello@lutoma.org>\n"
 "Language-Team: German <http://weblate.ohai.su/projects/autopeer/django/de/>\n"
@@ -348,18 +348,6 @@ msgstr ""
 msgid ""
 "Thank you! A verification mail has been sent to the email address in your "
 "admin-c object. Please click the link in the email to proceed."
-msgstr ""
-
-#: templates/formtools/wizard/wizard_form.html:23
-msgid "first step"
-msgstr ""
-
-#: templates/formtools/wizard/wizard_form.html:24
-msgid "prev step"
-msgstr ""
-
-#: templates/formtools/wizard/wizard_form.html:26
-msgid "submit"
 msgstr ""
 
 #: templates/index.html:12
