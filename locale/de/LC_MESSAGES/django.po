@@ -297,19 +297,19 @@ msgstr "Abmelden"
 
 #: templates/base.html:71
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: templates/base.html:71
 msgid "Source code"
-msgstr ""
+msgstr "Sourcecode"
 
 #: templates/base.html:71
 msgid "Help translate this page"
-msgstr ""
+msgstr "Hilf bei der Übersetzung dieser Seite"
 
 #: templates/base.html:71
 msgid "Legal notice"
-msgstr ""
+msgstr "Impressum"
 
 #: templates/dn42auth/signup.html:15
 msgid ""
@@ -339,10 +339,12 @@ msgid ""
 "Your maintainer object has been verified! Set a password and email address, "
 "and you're good to go."
 msgstr ""
+"Dein Maintainer-Objekt wurde erfolgreich verifiziert! Jetzt musst du nur "
+"noch ein Passwort und eine E-Mail-Adresse setzen."
 
 #: templates/dn42auth/signup_auth.html:20
 msgid "Finish registration"
-msgstr ""
+msgstr "Registrierung abschließen"
 
 #: templates/dn42auth/signup_sent.html:14
 msgid ""
@@ -352,7 +354,7 @@ msgstr ""
 
 #: templates/index.html:12
 msgid "AS64719 automatic peering"
-msgstr ""
+msgstr "Automatisches Peering mit AS64719"
 
 #: templates/index.html:13
 msgid ""
@@ -547,3 +549,15 @@ msgstr "E-Mail-Adresse"
 #: templates/registration/login.html:34
 msgid "Password"
 msgstr "Passwort"
+
+#: templates/formtools/wizard/wizard_form.html:23
+msgid "first step"
+msgstr ""
+
+#: templates/formtools/wizard/wizard_form.html:24
+msgid "prev step"
+msgstr ""
+
+#: templates/formtools/wizard/wizard_form.html:26
+msgid "submit"
+msgstr ""
