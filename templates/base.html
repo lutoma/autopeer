@@ -4,14 +4,14 @@
 {% get_available_languages as LANGUAGES %}
 
 <!doctype html>
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="{{ LANGUAGE_CODE }}" class="h-100">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="{% static 'css/screen.css' %}" rel='stylesheet' type='text/css'>
 		<title>{% block title %}{% trans 'AS64719 peering portal' %}{% endblock %}</title>
 	</head>
-	<body class="pt-0">
+	<body class="pt-0 d-flex flex-column h-100">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white p-3 mb-5">
 			<div class="container">
 				<a class="navbar-brand" href="/">dn42.lutoma.org</a>
@@ -59,11 +59,18 @@
 			</div>
 		</nav>
 
-	    <div class="container">
-			{% block content %}
-			{% endblock %}
-	    </div>
+		<main class="flex-shrink-0">
+			<div class="container">
+				{% block content %}
+				{% endblock %}
+			</div>
+		</main>
 
+		<footer class="footer mt-auto pt-5 pb-4">
+			<div class="container">
+				<span class="text-muted small"><a href="https://lutoma.org/contact">{% trans 'Contact' %}</a> / <a href="https://github.com/lutoma/autopeer">{% trans 'Source code' %}</a> / <a href="https://weblate.ohai.su/projects/autopeer/django/">{% trans 'Help translate this page' %}</a> / <a href="https://fnordserver.eu/en/imprint">{% trans 'Legal notice' %}</a></span>
+			</div>
+		</footer>
 		<script src="{% static 'js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
 	</body>
 </html>

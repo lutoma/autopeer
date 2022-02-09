@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-09 00:53+0000\n"
+"POT-Creation-Date: 2022-02-09 02:23+0000\n"
 "PO-Revision-Date: 2022-02-09 01:20+0000\n"
 "Last-Translator: lutoma <hello@lutoma.org>\n"
 "Language-Team: German <http://weblate.ohai.su/projects/autopeer/django/de/>\n"
@@ -183,8 +183,8 @@ msgid ""
 "IPv6 over the IPv6 link-local address (RFC 4760)"
 msgstr ""
 "Falls gesetzt, wird der Router eine Multi-protocol session über die IPv6 "
-"link-local-Adresse aufbauen, die sowohl für IPv6 als auch IPv4 genutzt wird ("
-"RFC 4760)"
+"link-local-Adresse aufbauen, die sowohl für IPv6 als auch IPv4 genutzt wird "
+"(RFC 4760)"
 
 #: peeringmanager/models.py:68 templates/peeringmanager/peering_list.html:19
 msgid "Router"
@@ -241,7 +241,7 @@ msgstr "Wireguard-Port"
 msgid "Peering"
 msgstr "Peering"
 
-#: peeringmanager/models.py:149 templates/base.html:19
+#: peeringmanager/models.py:149 templates/base.html:26
 msgid "Peerings"
 msgstr "Peerings"
 
@@ -271,29 +271,45 @@ msgstr "Wireguard-Public Key hat eine ungültige Länge"
 msgid "Could not connect to dn42 whois servers."
 msgstr "Konnte keine Verbindung zu den dn42-Whois-Servern herstellen."
 
-#: templates/base.html:10
+#: templates/base.html:12
 msgid "AS64719 peering portal"
 msgstr "AS64719 Peeringportal"
 
-#: templates/base.html:21
+#: templates/base.html:28
 msgid "Home"
 msgstr "Start"
 
-#: templates/base.html:27 templates/index.html:16
+#: templates/base.html:52 templates/index.html:16
 #: templates/registration/login.html:6 templates/registration/login.html:11
 #: templates/registration/login.html:38
 msgid "Log in"
 msgstr "Anmelden"
 
-#: templates/base.html:28 templates/dn42auth/signup.html:6
+#: templates/base.html:53 templates/dn42auth/signup.html:6
 #: templates/dn42auth/signup_auth.html:6 templates/dn42auth/signup_sent.html:6
 #: templates/index.html:15
 msgid "Sign up"
 msgstr "Registrieren"
 
-#: templates/base.html:30
+#: templates/base.html:55
 msgid "Log out"
 msgstr "Abmelden"
+
+#: templates/base.html:71
+msgid "Contact"
+msgstr ""
+
+#: templates/base.html:71
+msgid "Source code"
+msgstr ""
+
+#: templates/base.html:71
+msgid "Help translate this page"
+msgstr ""
+
+#: templates/base.html:71
+msgid "Legal notice"
+msgstr ""
 
 #: templates/dn42auth/signup.html:15
 msgid ""

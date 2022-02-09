@@ -11,3 +11,10 @@ body {
 	padding: 2rem 0;
 	font-family: 'Fira Sans', 'Open Sans', sans-serif;
 }
+
+footer {
+	a {
+		text-decoration: none;
+		color: $text-muted;
+	}
+}

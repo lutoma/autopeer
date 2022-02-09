@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-09 00:53+0000\n"
+"POT-Creation-Date: 2022-02-09 02:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -217,7 +217,7 @@ msgstr ""
 msgid "Peering"
 msgstr ""
 
-#: peeringmanager/models.py:149 templates/base.html:19
+#: peeringmanager/models.py:149 templates/base.html:26
 msgid "Peerings"
 msgstr ""
 
@@ -245,28 +245,44 @@ msgstr ""
 msgid "Could not connect to dn42 whois servers."
 msgstr ""
 
-#: templates/base.html:10
+#: templates/base.html:12
 msgid "AS64719 peering portal"
 msgstr ""
 
-#: templates/base.html:21
+#: templates/base.html:28
 msgid "Home"
 msgstr ""
 
-#: templates/base.html:27 templates/index.html:16
+#: templates/base.html:52 templates/index.html:16
 #: templates/registration/login.html:6 templates/registration/login.html:11
 #: templates/registration/login.html:38
 msgid "Log in"
 msgstr ""
 
-#: templates/base.html:28 templates/dn42auth/signup.html:6
+#: templates/base.html:53 templates/dn42auth/signup.html:6
 #: templates/dn42auth/signup_auth.html:6 templates/dn42auth/signup_sent.html:6
 #: templates/index.html:15
 msgid "Sign up"
 msgstr ""
 
-#: templates/base.html:30
+#: templates/base.html:55
 msgid "Log out"
+msgstr ""
+
+#: templates/base.html:71
+msgid "Contact"
+msgstr ""
+
+#: templates/base.html:71
+msgid "Source code"
+msgstr ""
+
+#: templates/base.html:71
+msgid "Help translate this page"
+msgstr ""
+
+#: templates/base.html:71
+msgid "Legal notice"
 msgstr ""
 
 #: templates/dn42auth/signup.html:15
