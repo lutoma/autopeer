@@ -92,6 +92,7 @@ LOCALE_PATHS = [
 LANGUAGES = (
     ('en-us', 'English'),
     ('de-de', 'Deutsch'),
+    ('zh-cn', '简体中文'),
 )
 
 

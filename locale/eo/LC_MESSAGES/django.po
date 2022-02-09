@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-09 02:56+0000\n"
+"POT-Creation-Date: 2022-02-09 17:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -455,6 +455,21 @@ msgstr ""
 
 #: templates/peeringmanager/peering_list.html:38
 msgid "since"
+msgstr ""
+
+#: templates/peeringmanager/peering_list.html:50
+#: templates/peeringmanager/peering_list.html:59
+msgid "imported"
+msgstr ""
+
+#: templates/peeringmanager/peering_list.html:51
+#: templates/peeringmanager/peering_list.html:60
+msgid "primary"
+msgstr ""
+
+#: templates/peeringmanager/peering_list.html:52
+#: templates/peeringmanager/peering_list.html:61
+msgid "filtered"
 msgstr ""
 
 #: templates/peeringmanager/peering_list.html:54
