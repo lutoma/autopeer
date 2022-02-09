@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-09 02:23+0000\n"
+"POT-Creation-Date: 2022-02-09 02:26+0000\n"
 "PO-Revision-Date: 2022-02-09 01:20+0000\n"
 "Last-Translator: lutoma <hello@lutoma.org>\n"
 "Language-Team: German <http://weblate.ohai.su/projects/autopeer/django/de/>\n"
@@ -337,7 +337,7 @@ msgstr "Verifikationslink anfordern"
 #: templates/dn42auth/signup_auth.html:14
 msgid ""
 "Your maintainer object has been verified! Set a password and email address, "
-"and you"
+"and you're good to go."
 msgstr ""
 
 #: templates/dn42auth/signup_auth.html:20
@@ -527,7 +527,7 @@ msgid "Details"
 msgstr "Details"
 
 #: templates/peeringmanager/peering_list.html:86
-msgid "You don\\"
+msgid "You don't seem to have any peerings."
 msgstr ""
 
 #: templates/peeringmanager/peering_list.html:86

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-09 02:23+0000\n"
+"POT-Creation-Date: 2022-02-09 02:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -305,7 +305,7 @@ msgstr ""
 #: templates/dn42auth/signup_auth.html:14
 msgid ""
 "Your maintainer object has been verified! Set a password and email address, "
-"and you"
+"and you're good to go."
 msgstr ""
 
 #: templates/dn42auth/signup_auth.html:20
@@ -489,7 +489,7 @@ msgid "Details"
 msgstr ""
 
 #: templates/peeringmanager/peering_list.html:86
-msgid "You don\\"
+msgid "You don't seem to have any peerings."
 msgstr ""
 
 #: templates/peeringmanager/peering_list.html:86
