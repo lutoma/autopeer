@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-09 02:30+0000\n"
-"PO-Revision-Date: 2022-02-09 01:20+0000\n"
+"PO-Revision-Date: 2022-02-09 02:31+0000\n"
 "Last-Translator: lutoma <hello@lutoma.org>\n"
 "Language-Team: German <http://weblate.ohai.su/projects/autopeer/django/de/>\n"
-"Language: de_de\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,7 +35,7 @@ msgid ""
 "Please enter your mntner object as it exists in the DN42 registry, including "
 "the -MNT suffix."
 msgstr ""
-"Bitte gib dein mtner Objekt so ein wie esin der DN42-Registry existiert - "
+"Bitte gib dein mtner Objekt so ein wie es in der DN42-Registry existiert - "
 "inklusive -MNT-Suffix."
 
 #: dn42auth/views.py:30
@@ -518,7 +518,7 @@ msgstr "Details"
 
 #: templates/peeringmanager/peering_list.html:86
 msgid "You don't seem to have any peerings."
-msgstr ""
+msgstr "Du scheinst keine Peerings zu haben."
 
 #: templates/peeringmanager/peering_list.html:86
 msgid "Create one!"
@@ -532,7 +532,7 @@ msgstr ""
 
 #: templates/registration/logged_out.html:6
 msgid "Logged out"
-msgstr ""
+msgstr "Abgemeldet"
 
 #: templates/registration/logged_out.html:11
 msgid "Bye!"
