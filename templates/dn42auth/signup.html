@@ -12,8 +12,8 @@
 		<form class="mt-4" method="post" action="/signup/">
 			{% csrf_token %}
 
-			<p>If this is your first time using the automatic peering service, you need to verify your <em>Maintainer</em> object from the DN42 registry (e.g. <code>FOOBAR-MNT</code>).</p>
-			<p>After submitting this form, you will receive an email with a signup link to the email address of the listed <code>admin-c</code> contact.</p>
+			<p>{% trans 'If this is your first time using the automatic peering service, you need to verify your <em>Maintainer</em> object from the DN42 registry (e.g. <code>FOOBAR-MNT</code>).' %}</p>
+			<p>{% trans 'After submitting this form, you will receive an email with a signup link to the email address of the listed <code>admin-c</code> contact.' %}</p>
 
 			<div class="form-floating mb-3">
 				{% if form.name.errors %}
@@ -22,8 +22,8 @@
 				{% else %}
 					<input type="text" name="name" placeholder="FOOBAR-MNT" class="form-control" id="id_name">
 				{% endif %}
-				<label for="id_name">Maintainer</label>
-			    <small class="form-text text-muted">Please enter your mntner object as it exists in the DN42 registry, including the -MNT suffix.</small>
+				<label for="id_name">{% trans 'Maintainer' %}</label>
+			    <small class="form-text text-muted">{% trans 'Please enter your mntner object as it exists in the DN42 registry, including the -MNT suffix.' %}</small>
 			</div>
 
 			<button class="btn btn-primary" type="submit"><i class="fa-light fa-envelopes"></i> {% trans 'Get verification link' %}</button>

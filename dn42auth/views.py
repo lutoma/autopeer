@@ -15,7 +15,7 @@ import re
 
 
 class VerificationForm(forms.Form):
-	name = forms.CharField(label='Maintainer',
+	name = forms.CharField(label=_('Maintainer'),
 		widget=forms.TextInput(attrs={'placeholder': 'FOOBAR-MNT'}),
 		help_text=_('Please enter your mntner object as it exists in the DN42 registry, including the -MNT suffix.'))
 
@@ -27,22 +27,22 @@ class VerificationForm(forms.Form):
 		name = self.cleaned_data['name']
 
 		if DN42User.objects.filter(dn42_mntner=name).exists():
-			raise ValidationError({'name': 'This maintainer object is already registered with an account. Ping lutoma if you have forgotten your login details.'})
+			raise ValidationError({'name': _('This maintainer object is already registered with an account. Ping lutoma if you have forgotten your login details.')})
 
 		mntner = whois_query(name)
 		if not mntner:
-			raise ValidationError({'name': 'Could not find an object by this name in the registry. If you only just registered it, try waiting a bit until caches have cleared.'})
+			raise ValidationError({'name': _('Could not find an object by this name in the registry. If you only just registered it, try waiting a bit until caches have cleared.')})
 
 		if 'mntner' not in mntner or mntner['mntner'][0] != name:
-			raise ValidationError({'name': 'An object with this name exists in the registry, but it does not seem to be a mntner.'})
+			raise ValidationError({'name': _('An object with this name exists in the registry, but it does not seem to be a mntner.')})
 
 		if 'admin-c' not in mntner:
-			raise ValidationError({'name': 'This mntner object does not seem to have an admin-c set.'})
+			raise ValidationError({'name': _('This mntner object does not seem to have an admin-c set.')})
 
 		adminc_name = mntner['admin-c'][0]
 		adminc = whois_query(adminc_name)
 		if not adminc:
-			raise ValidationError({'name': f'Could not find the admin-c object {adminc_name} listed in the mntner.'})
+			raise ValidationError({'name': _('Could not find the admin-c object {} that is listed in the mntner.').format(adminc_name)})
 
 		if 'e-mail' in adminc:
 			self.cleaned_data['email'] = adminc['e-mail'][0]
@@ -65,7 +65,7 @@ class VerificationForm(forms.Form):
 					break
 
 			if 'email' not in self.cleaned_data:
-				raise ValidationError({'name': f'The admin-c object {adminc_name} does not seem to contain an email address.'})
+				raise ValidationError({'name': _('The admin-c object {} does not seem to contain an email address.').format(adminc_name)})
 
 		if 'nick' in adminc:
 			self.cleaned_data['nick'] = adminc['nick'][0]
@@ -103,7 +103,7 @@ class SignupForm(forms.ModelForm):
 
 	def clean(self):
 		if self.cleaned_data['password'] != self.cleaned_data['password_confirmation']:
-			raise ValidationError({'password': '', 'password_confirmation': 'Passwords did not match.'})
+			raise ValidationError({'password': '', 'password_confirmation': _('Passwords did not match.')})
 
 	def save(self, commit=True):
 		user = super().save(commit=False)

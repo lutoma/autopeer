@@ -6,14 +6,14 @@
 {% block content %}
 	<div class="row flex-lg-row-reverse align-items-center g-5 py-5 pt-2">
 	  <div class="col-10 col-sm-8 col-lg-6">
-		<img src="{% static 'img/autopeer.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+		<img src="{% static 'img/autopeer.png' %}" class="d-block mx-lg-auto img-fluid" width="700" height="500" loading="lazy">
 	  </div>
 	  <div class="col-lg-6">
-		<h1 class="display-5 fw-bold lh-1 mb-3">AS64719 automatic peering</h1>
-		<p class="lead">Welcome! This service will allow you to automatically establish and manage DN42 peerings with AS64719 over Wireguard.</p>
+		<h1 class="display-5 fw-bold lh-1 mb-3">{% trans 'AS64719 automatic peering' %}</h1>
+		<p class="lead">{% trans 'Welcome! This service will allow you to automatically establish and manage DN42 peerings with AS64719 over Wireguard.' %}</p>
 		<div class="mt-5 d-grid gap-2 d-md-flex justify-content-md-start">
-		  <a href="/signup/" class="btn btn-primary btn-lg px-4 me-md-2"><i class="fa-light fa-user-plus"></i> Sign up</a>
-		  <a href="/login/" class="btn btn-outline-secondary btn-lg px-4"><i class="fa-light fa-arrow-right-to-bracket"></i> Log in</a>
+		  <a href="/signup/" class="btn btn-primary btn-lg px-4 me-md-2"><i class="fa-light fa-user-plus"></i> {% trans 'Sign up' %}</a>
+		  <a href="/login/" class="btn btn-outline-secondary btn-lg px-4"><i class="fa-light fa-arrow-right-to-bracket"></i> {% trans 'Log in' %}</a>
 		</div>
 	  </div>
 	</div>

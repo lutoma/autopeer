@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class='row'>
 	<div class='col-lg-12 d-flex justify-content-between'>
 		<h1>Peerings</h1>
 		<div>
-			<a href='/peerings/new/' class='btn btn-primary'><i class="fa-regular fa-plus"></i> Create peering</a>
+			<a href='/peerings/new/' class='btn btn-primary'><i class="fa-regular fa-plus"></i> {% trans 'Create peering' %}</a>
 		</div>
 	</div>
 
@@ -13,13 +14,13 @@
 		<table class='table table-striped'>
 			<thead>
 				<tr>
-					<th scope='col'><i class="fa-regular fa-hashtag"></i> ASN</th>
-					<th scope='col'><i class="fa-regular fa-satellite-dish"></i> State</th>
-					<th scope='col'><i class="fa-regular fa-server"></i> Router</th>
-					<th scope='col'><i class="fa-regular fa-bullseye-pointer"></i> Endpoint</th>
-					<th scope='col'><i class="fa-regular fa-route"></i> Routes IPv4</th>
-					<th scope='col'><i class="fa-regular fa-route"></i> Routes IPv6</th>
-					<th scope='col'><i class="fa-regular fa-chart-area"></i> Traffic avg.</th>
+					<th scope='col'><i class="fa-regular fa-hashtag"></i> {% trans 'ASN' %}</th>
+					<th scope='col'><i class="fa-regular fa-satellite-dish"></i> {% trans 'State' %}</th>
+					<th scope='col'><i class="fa-regular fa-server"></i> {% trans 'Router' %}</th>
+					<th scope='col'><i class="fa-regular fa-bullseye-pointer"></i> {% trans 'Endpoint' %}</th>
+					<th scope='col'><i class="fa-regular fa-route"></i> {% trans 'Routes IPv4' %}</th>
+					<th scope='col'><i class="fa-regular fa-route"></i> {% trans 'Routes IPv6' %}</th>
+					<th scope='col'><i class="fa-regular fa-chart-area"></i> {% trans 'Traffic avg.' %}</th>
 					<th scope='col'></th>
 			</thead>
 
@@ -34,7 +35,7 @@
 							{% else %}
 								<span class='badge bg-warning'>{{ status.state }}</span>
 							{% endif %}
-								<br><small>since {{ status.state_since }}</small>
+								<br><small>{% trans 'since' %} {{ status.state_since }}</small>
 						</td>
 						<td>
 							{{ peering.router.flag_emoji }} {{ peering.router.location }}<br />
@@ -50,7 +51,7 @@
 								<small>{{ status.routes_v4_primary }} primary</small><br />
 								<small>{{ status.routes_v4_filtered }} filtered</small>
 							{% else %}
-								<em>Not available</em>
+								<em>{% trans 'Not available' %}</em>
 							{% endif %}
 						</td>
 						<td>
@@ -59,22 +60,22 @@
 								<small>{{ status.routes_v6_primary }} primary</small><br />
 								<small>{{ status.routes_v6_filtered }} filtered</small>
 							{% else %}
-								<em>Not available</em>
+								<em>{% trans 'Not available' %}</em>
 							{% endif %}
 						</td>
 						{% endwith %}
 						<td>
 							{% with traffic=peering.get_traffic %}
 								{% if traffic %}
-									Receive: {{ traffic.rx }}/s<br />
-									Transmit: {{ traffic.tx }}/s<br />
+									{% trans 'Receive:' %} {{ traffic.rx }}/s<br />
+									{% trans 'Transmit:' %} {{ traffic.tx }}/s<br />
 								{% else %}
-									<em>Not available</em>
+									<em>{% trans 'Not available' %}</em>
 								{% endif %}
 							{% endwith %}
 						</td>
 						<td>
-							<a class='btn btn-secondary' href='/peerings/{{ peering.id }}/'><i class="fa-regular fa-circle-info"></i> Details</a>
+							<a class='btn btn-secondary' href='/peerings/{{ peering.id }}/'><i class="fa-regular fa-circle-info"></i> {% trans 'Details' %}</a>
 						</td>
 					</tr>
 				{% endfor %}
@@ -82,11 +83,11 @@
 		</table>
 
 		{% if not object_list %}
-			<p>You don't seem to have any peerings. <a href='/peerings/new/'>Create one!</a></p>
+			<p>{% trans 'You don\'t seem to have any peerings.' %} <a href='/peerings/new/'>{% trans 'Create one!' %}</a></p>
 		{% endif %}
 	</div>
 	<div class='col-lg-12 mt-4'>
-		<small>If you need additional custom settings for your peering or something is broken, feel free to <a href="https://lutoma.org/contact">contact me</a>.</small>
+		<small>{% trans 'If you need additional custom settings for your peering or something is broken, feel free to <a href="https://lutoma.org/contact">contact me</a>.' %}</small>
 	</div>
 </div>
 {% endblock %}

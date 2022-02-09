@@ -1,24 +1,25 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
+{% load i18n %}
 
 {% block content %}
-<div class='row'>
-	<div class='col-lg-12'>
+<div class="row">
+	<div class="col-lg-12">
 		{% if request.resolver_match.url_name == 'peerings-edit' %}
-			<h1>Edit peering with {{ peering.endpoint }}</h1>
+			<h1>{% blocktrans with endpoint=peering.endpoint %}Edit peering with {{ endpoint }}{% endblocktrans %}</h1>
 		{% else %}
-			<h1>Create peering</h1>
+			<h1>{% trans 'Create peering' %}</h1>
 		{% endif %}
 	</div>
 
-	<div class='col-lg-6'>
-		<form method='POST'>
+	<div class="col-lg-6">
+		<form method="POST">
 			{% csrf_token %}
 			{% bootstrap_form_errors form %}
 
 			<div class="card mt-4">
 				<div class="card-body">
-					<h5 class="card-title mb-3">General</h5>
+					<h5 class="card-title mb-3">{% trans 'General' %}</h5>
 					{% bootstrap_field form.router %}
 					{% bootstrap_field form.name %}
 				</div>
@@ -26,7 +27,7 @@
 
 			<div class="card mt-4">
 				<div class="card-body">
-					<h5 class="card-title mb-3">VPN</h5>
+					<h5 class="card-title mb-3">{% trans 'VPN' %}</h5>
 					{% bootstrap_field form.vpn_type %}
 					{% bootstrap_field form.endpoint %}
 					{% bootstrap_field form.wg_peer_pubkey %}
@@ -35,7 +36,7 @@
 
 			<div class="card mt-4">
 				<div class="card-body">
-					<h5 class="card-title mb-3">BGP</h5>
+					<h5 class="card-title mb-3">{% trans 'BGP' %}</h5>
 					{% bootstrap_field form.asn %}
 					{% bootstrap_field form.endpoint_internal_v4 %}
 					{% bootstrap_field form.endpoint_internal_v6 %}
@@ -45,9 +46,9 @@
 			</div>
 
 			{% if request.resolver_match.url_name == 'peerings-edit' %}
-				<input type='submit' class='btn btn-primary mt-4' value='Update peering' />
+				<input type="submit" class="btn btn-primary mt-4" value="{% trans 'Update peering' %}" />
 			{% else %}
-				<input type='submit' class='btn btn-primary mt-4' value='Create peering' />
+				<input type="submit" class="btn btn-primary mt-4" value="{% trans 'Create peering' %}" />
 			{% endif %}
 		</form>
 	</div>

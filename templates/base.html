@@ -7,7 +7,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="{% static 'css/screen.css' %}" rel='stylesheet' type='text/css'>
-		<title>{% block title %}{% trans 'dn42.lutoma.org autopeer' %}{% endblock %}</title>
+		<title>{% block title %}{% trans 'AS64719 peering portal' %}{% endblock %}</title>
 	</head>
 	<body class="pt-0">
 		<header class="p-3 mb-5 bg-dark text-white">
@@ -16,18 +16,18 @@
 					<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 
 						{% if user.is_authenticated %}
-							<li><a href="/peerings/" class="nav-link px-2 text-white">Peerings</a></li>
+							<li><a href="/peerings/" class="nav-link px-2 text-white">{% trans 'Peerings' %}</a></li>
 						{% else %}
-							<li><a href="/" class="nav-link px-2 text-white">Home</a></li>
+							<li><a href="/" class="nav-link px-2 text-white">{% trans 'Home' %}</a></li>
 						{% endif %}
 					</ul>
 
 					<div class="text-end">
 						{% if not user.is_authenticated %}
-							<a href="/login/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-to-bracket"></i> Log in</a>
-							<a href="/signup/" class="btn btn-warning"><i class="fa-regular fa-user-plus"></i>  Sign up</a>
+							<a href="/login/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-to-bracket"></i> {% trans 'Log in' %}</a>
+							<a href="/signup/" class="btn btn-warning"><i class="fa-regular fa-user-plus"></i>  {% trans 'Sign up' %}</a>
 						{% else %}
-							<a href="/logout/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-from-bracket"></i> Log out</a>
+							<a href="/logout/" class="btn btn-outline-light me-2"><i class="fa-regular fa-arrow-right-from-bracket"></i> {% trans 'Log out' %}</a>
 						{% endif %}
 					</div>
 				</div>
