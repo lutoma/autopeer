@@ -47,18 +47,18 @@
 						</td>
 						<td>
 							{% if status %}
-								{{ status.routes_v4 }} imported<br />
-								<small>{{ status.routes_v4_primary }} primary</small><br />
-								<small>{{ status.routes_v4_filtered }} filtered</small>
+								{{ status.routes_v4 }} {% trans 'imported' %}<br />
+								<small>{{ status.routes_v4_primary }} {% trans 'primary' %}</small><br />
+								<small>{{ status.routes_v4_filtered }} {% trans 'filtered' %}</small>
 							{% else %}
 								<em>{% trans 'Not available' %}</em>
 							{% endif %}
 						</td>
 						<td>
 							{% if status %}
-								{{ status.routes_v6 }} imported<br />
-								<small>{{ status.routes_v6_primary }} primary</small><br />
-								<small>{{ status.routes_v6_filtered }} filtered</small>
+								{{ status.routes_v6 }} {% trans 'imported' %}<br />
+								<small>{{ status.routes_v6_primary }} {% trans 'primary' %}</small><br />
+								<small>{{ status.routes_v6_filtered }} {% trans 'filtered' %}</small>
 							{% else %}
 								<em>{% trans 'Not available' %}</em>
 							{% endif %}
