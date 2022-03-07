@@ -35,7 +35,9 @@ RUN apt-get remove -y curl gnupg2 gcc libc6-dev yarnpkg librrd-dev gettext git &
   rm -rf node_modules
 
 RUN mkdir -p /data
-RUN rm -f autopeer/settings_local.py && ln -s /data/settings_local.py autopeer/settings_local.py
+RUN rm -f autopeer/settings_local.py && \
+  ln -s /data/settings_local.py autopeer/settings_local.py && \
+  ln -s /data/ssh $HOME/.ssh
 
 HEALTHCHECK CMD curl --fail --unix-socket /run/gunicorn.sock http://localhost || exit 1
 CMD ["/usr/bin/supervisord", "-c", "/app/docker/supervisord.conf"]
