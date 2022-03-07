@@ -8,7 +8,7 @@ WORKDIR /app
 RUN curl -sS https://dl.cloudsmith.io/public/caddy/stable/gpg.key | apt-key add - && \
   echo "deb https://dl.cloudsmith.io/public/caddy/stable/deb/debian any-version main" | tee /etc/apt/sources.list.d/caddy.list
 
-RUN apt-get update && apt-get -y install supervisor build-essential yarnpkg caddy rrdtool librrd8 librrd-dev
+RUN apt-get update && apt-get -y install supervisor build-essential yarnpkg caddy rrdtool librrd8 librrd-dev whois wireguard-tools
 RUN pip install --no-cache-dir poetry
 
 COPY pyproject.toml .
