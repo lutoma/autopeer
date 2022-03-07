@@ -28,5 +28,6 @@ jobs:
           push: true
           tags: lutoma/autopeer:latest
           file: docker/Dockerfile
+          platforms: linux/amd64,linux/arm64
           build-args: |
             "FONTAWESOME_AUTH_TOKEN=${{ secrets.FONTAWESOME_AUTH_TOKEN }}"
