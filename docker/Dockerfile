@@ -29,6 +29,7 @@ COPY . .
 
 RUN yarnpkg run gulp build
 RUN poetry run ./manage.py collectstatic --noinput
+RUN poetry run ./manage.py compilemessages
 
 RUN mkdir -p /data
 RUN rm -f autopeer/settings_local.py && ln -s /data/settings_local.py autopeer/settings_local.py
