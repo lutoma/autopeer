@@ -1,0 +1,14 @@
+:80 {
+	header ?X-Frame-Options DENY
+	header ?X-Content-Type-Options nosniff
+	header ?X-XSS-Protection "1; mode=block"
+
+	route /static/* {
+		root * /app/static-collect
+		uri strip_prefix /static
+		header Cache-Control "public, immutable, max-age=5184000"
+		file_server
+	}
+
+	reverse_proxy unix//run/gunicorn.sock
+}
