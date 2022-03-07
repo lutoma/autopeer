@@ -15,7 +15,7 @@ COPY pyproject.toml .
 COPY poetry.lock .
 
 RUN poetry install && \
-  poetry run pip install gunicorn
+  poetry run pip install gunicorn psycopg2-binary
 
 COPY package.json .
 COPY yarn.lock .
