@@ -54,11 +54,11 @@ class Peering(models.Model):
 	endpoint = models.CharField(max_length=200, verbose_name=_('Wireguard endpoint'),
 		help_text=_('Hostname/IP and port, e.g. example.org:1234, 127.0.0.1:1234, [::1]:1234'))
 
-	endpoint_internal_v4 = models.GenericIPAddressField(protocol='IPv4',
+	endpoint_internal_v4 = models.GenericIPAddressField(protocol='IPv4', blank=True, null=True,
 		verbose_name=_('Internal IPv4 address'),
 		help_text=_('Internal DN42 address of your router'))
 
-	endpoint_internal_v6 = models.GenericIPAddressField(protocol='IPv6',
+	endpoint_internal_v6 = models.GenericIPAddressField(protocol='IPv6', blank=True, null=True,
 		verbose_name=_('Link-local IPv6 address'),
 		help_text=_('Link-local IPv6 address of your router'))
 

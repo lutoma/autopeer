@@ -62,9 +62,10 @@ class PeeringForm(forms.ModelForm):
 		return self.cleaned_data['asn']
 
 	def clean_endpoint_internal_v4(self):
-		mntby = get_whois_field(self.cleaned_data['endpoint_internal_v4'], 'mnt-by')
-		if self.user.dn42_mntner not in mntby:
-			raise ValidationError(_('User is not listed as mnt-by for this IP'))
+		if self.cleaned_data['endpoint_internal_v4']:
+			mntby = get_whois_field(self.cleaned_data['endpoint_internal_v4'], 'mnt-by')
+			if self.user.dn42_mntner not in mntby:
+				raise ValidationError(_('User is not listed as mnt-by for this IP'))
 
 		return self.cleaned_data['endpoint_internal_v4']
 
@@ -78,6 +79,18 @@ class PeeringForm(forms.ModelForm):
 		if len(self.cleaned_data['wg_peer_pubkey']) != 44:
 			raise ValidationError(_('Wireguard public key has invalid length'))
 		return self.cleaned_data['wg_peer_pubkey']
+
+	def clean(self):
+		cleaned_data = super().clean()
+		ipv4 = cleaned_data.get('endpoint_internal_v4')
+		ipv6 = cleaned_data.get('endpoint_internal_v6')
+		mbgp = cleaned_data.get('mbgp_enabled')
+
+		if not ipv4 and not ipv6:
+			raise ValidationError(_('You need to specify an internal IPv4 or IPv6 address (or both)'))
+
+		if not ipv6 and mbgp:
+			raise ValidationError({'mbgp_enabled': _('MBGP can only be enabled if an internal IPv6 address is provided')})
 
 	class Meta:
 		model = Peering
