@@ -8,11 +8,11 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-09 17:28+0000\n"
-"PO-Revision-Date: 2022-03-25 17:20+0000\n"
-"Last-Translator: Kongcheng Lige <kongchenglige@gmail.com>\n"
-"Language-Team: Chinese (Simplified) <http://weblate.ohai.su/projects/"
-"autopeer/django/zh_Hans/>\n"
-"Language: zh\n"
+"PO-Revision-Date: 2022-04-10 16:20+0000\n"
+"Last-Translator: silsha <felix@fnordserver.eu>\n"
+"Language-Team: Japanese <http://weblate.ohai.su/projects/autopeer/django/ja/>"
+"\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,55 +21,55 @@ msgstr ""
 
 #: dn42auth/models.py:41
 msgid "email address"
-msgstr "电子邮件地址"
+msgstr "メールアドレス"
 
 #: dn42auth/models.py:42
 msgid "DN42 maintainer object"
-msgstr "DN42 maintainer 对象"
+msgstr ""
 
 #: dn42auth/views.py:18 templates/dn42auth/signup.html:25
 msgid "Maintainer"
-msgstr "维护者"
+msgstr "メンテナンス担当者"
 
 #: dn42auth/views.py:20 templates/dn42auth/signup.html:26
 msgid ""
 "Please enter your mntner object as it exists in the DN42 registry, including "
 "the -MNT suffix."
-msgstr "请输入您已经在DN42注册表内注册的 mntner 对象,包括 -MNT 后缀."
+msgstr ""
 
 #: dn42auth/views.py:30
 msgid ""
 "This maintainer object is already registered with an account. Ping lutoma if "
 "you have forgotten your login details."
-msgstr "这个maintainer对象已经被一个账户注册了. 如果您忘记了登录信息, 请咨询lutoma."
+msgstr ""
 
 #: dn42auth/views.py:34
 msgid ""
 "Could not find an object by this name in the registry. If you only just "
 "registered it, try waiting a bit until caches have cleared."
-msgstr "无法在注册表中找到此名称的对象. 如果您刚刚注册, 请等待缓存清除."
+msgstr ""
 
 #: dn42auth/views.py:37
 msgid ""
 "An object with this name exists in the registry, but it does not seem to be "
 "a mntner."
-msgstr "这个名称的对象在注册表中存在,但它似乎不是并不是mntner对象."
+msgstr ""
 
 #: dn42auth/views.py:40
 msgid "This mntner object does not seem to have an admin-c set."
-msgstr "这个mntner对象没有设置admin-c属性."
+msgstr ""
 
 #: dn42auth/views.py:45
 msgid "Could not find the admin-c object {} that is listed in the mntner."
-msgstr "无法找到mntner中列出的 admin-c对象{}."
+msgstr ""
 
 #: dn42auth/views.py:68
 msgid "The admin-c object {} does not seem to contain an email address."
-msgstr "admin-c对象{}似乎并不包含一个电子邮件地址."
+msgstr ""
 
 #: dn42auth/views.py:106
 msgid "Passwords did not match."
-msgstr "密码不匹配."
+msgstr ""
 
 #: peeringmanager/models.py:11
 msgid "Location"
@@ -77,15 +77,15 @@ msgstr "位置"
 
 #: peeringmanager/models.py:12
 msgid "External host"
-msgstr "外部地址"
+msgstr ""
 
 #: peeringmanager/models.py:13
 msgid "Internal host"
-msgstr "内部地址"
+msgstr ""
 
 #: peeringmanager/models.py:14
 msgid "Internal IP"
-msgstr "内部IP"
+msgstr ""
 
 #: peeringmanager/models.py:15
 msgid "Location flag emoji"
@@ -93,19 +93,19 @@ msgstr ""
 
 #: peeringmanager/models.py:16
 msgid "Last allocated wireguard port"
-msgstr "最后分配的wireguard端口"
+msgstr ""
 
 #: peeringmanager/models.py:17
 msgid "Active"
-msgstr "激活"
+msgstr ""
 
 #: peeringmanager/models.py:18
 msgid "Users can only create peerings to active routers"
-msgstr "用户只能与激活状态的路由创建对等连接"
+msgstr ""
 
 #: peeringmanager/models.py:20
 msgid "Looking Glass ID"
-msgstr "Looking Glass ID"
+msgstr ""
 
 #: peeringmanager/models.py:39
 msgid "Wireguard"
@@ -113,83 +113,82 @@ msgstr ""
 
 #: peeringmanager/models.py:42
 msgid "Owner"
-msgstr "所有者"
+msgstr ""
 
 #: peeringmanager/models.py:45
 msgid "Maintainer object"
-msgstr "Maintainer 对象"
+msgstr ""
 
 #: peeringmanager/models.py:47
 msgid "AS Number"
-msgstr "ASN"
+msgstr ""
 
 #: peeringmanager/models.py:48
 msgid "Your maintainer object must be listed as mnt-by for the AS"
-msgstr "您的maintainer对象必须被AS列为mnt-by"
+msgstr ""
 
 #: peeringmanager/models.py:51
 msgid "VPN type"
-msgstr "VPN类型"
+msgstr ""
 
 #: peeringmanager/models.py:52
 msgid ""
 "Peering is also possible using OpenVPN/GRE/…, but only with manual setup for "
 "now."
-msgstr "也可以使用OpenVPN/GRE等进行对等,但目前只能手动进行设置."
+msgstr ""
 
 #: peeringmanager/models.py:54 templates/peeringmanager/peering_detail.html:38
 #: templates/peeringmanager/peering_detail.html:71
 msgid "Wireguard endpoint"
-msgstr "Wireguard 终结点"
+msgstr ""
 
 #: peeringmanager/models.py:55
 msgid "Hostname/IP and port, e.g. example.org:1234, 127.0.0.1:1234, [::1]:1234"
-msgstr "主机名/IP 和 端口, 例如: example.org:1234, 127.0.0.1:1234, [::1]:1234"
+msgstr ""
 
 #: peeringmanager/models.py:58
 msgid "Internal IPv4 address"
-msgstr "内部IPv4地址"
+msgstr ""
 
 #: peeringmanager/models.py:59
 msgid "Internal DN42 address of your router"
-msgstr "您router的DN42地址"
+msgstr ""
 
 #: peeringmanager/models.py:62
 msgid "Link-local IPv6 address"
-msgstr "Link-local IPv6地址"
+msgstr ""
 
 #: peeringmanager/models.py:63
 msgid "Link-local IPv6 address of your router"
-msgstr "您router的Link-local IPv6地址"
+msgstr ""
 
 #: peeringmanager/models.py:65
 msgid "Multi-protocol BGP over IPv6"
-msgstr "使用IPv6的Multi-protocol BGP"
+msgstr ""
 
 #: peeringmanager/models.py:66
 msgid ""
 "If set, the router will establish a Multi-protocol session for both IPv4 and "
 "IPv6 over the IPv6 link-local address (RFC 4760)"
-msgstr "如果设置了, router将会使用IPv6 link-local地址建立一个 IPv4和IPv6 的 Multi-protocol 会话"
+msgstr ""
 
 #: peeringmanager/models.py:68 templates/peeringmanager/peering_list.html:19
 msgid "Router"
-msgstr ""
+msgstr "ラウター"
 
 #: peeringmanager/models.py:70
 msgid "Link bandwidth"
-msgstr "链路带宽"
+msgstr ""
 
 #: peeringmanager/models.py:71
 msgid ""
 "Used to set <a href=\"https://dn42.eu/howto/Bird-communities\">BGP "
 "communities</a>"
 msgstr ""
-"设置<a href=\"https://dn42.eu/howto/Bird-communities\">BGP communities</a>"
 
 #: peeringmanager/models.py:73
 msgid "Peering name"
-msgstr "对等名称"
+msgstr ""
 
 #: peeringmanager/models.py:74
 msgid ""
@@ -197,100 +196,96 @@ msgid ""
 "name. Used for the Wireguard interface name, in the looking glass, and "
 "similar places. Lowercase ASCII only, max. 12 chars."
 msgstr ""
-"为对等设置一个人类可读的名称. 通常是您的昵称或网络名称. 它会被作为 Wireguard interface 名称, 在looking "
-"glass里以及其他类似的地方. 只能使用最长12字符的小写ASCII字符."
 
 #: peeringmanager/models.py:76
 msgid "Wireguard private key"
-msgstr "Wireguard 私钥"
+msgstr ""
 
 #: peeringmanager/models.py:77 peeringmanager/models.py:78
 msgid "Wireguard public key"
-msgstr "Wireguard 公钥"
+msgstr ""
 
 #: peeringmanager/models.py:79
 msgid ""
 "See <a href='https://www.wireguard.com/quickstart/#key-generation'>Wireguard "
 "manual</a> on how to generate the keys"
 msgstr ""
-"查看<a href='https://www.wireguard.com/quickstart/#key-"
-"generation'>Wireguard手册</a>来了解如何生成秘钥对"
 
 #: peeringmanager/models.py:81
 msgid "Wireguard port"
-msgstr "Wireguard 端口"
+msgstr ""
 
 #: peeringmanager/models.py:148
 msgid "Peering"
-msgstr "对等"
+msgstr ""
 
 #: peeringmanager/models.py:149 templates/base.html:26
 msgid "Peerings"
-msgstr "对等"
+msgstr ""
 
 #: peeringmanager/views.py:54
 msgid "Name contains illegal characters"
-msgstr "名称包含非法字符"
+msgstr ""
 
 #: peeringmanager/views.py:60
 msgid "AS does not exist or user is not listed as mnt-by for this AS"
-msgstr "AS 不存在或用户并没有被这个AS列为mnt-by"
+msgstr ""
 
 #: peeringmanager/views.py:67
 msgid "User is not listed as mnt-by for this IP"
-msgstr "用户没有被这个IP列为mnt-by"
+msgstr ""
 
 #: peeringmanager/views.py:73
 msgid "Endpoint doesn't seem to be valid IP/hostname:port combo"
-msgstr "终结点似乎不是一个有效的IP/主机名:端口 组合"
+msgstr ""
 
 #: peeringmanager/views.py:79
 msgid "Wireguard public key has invalid length"
-msgstr "Wireguard 公钥长度非法"
+msgstr ""
 
 #: peeringmanager/whois.py:12
 msgid "Could not connect to dn42 whois servers."
-msgstr "无法连接至 DN42 WHOIS 服务器."
+msgstr ""
 
 #: templates/base.html:12
 msgid "AS64719 peering portal"
-msgstr "AS64719 对等门户"
+msgstr ""
 
 #: templates/base.html:28
 msgid "Home"
-msgstr "主页"
+msgstr ""
 
 #: templates/base.html:52 templates/index.html:16
 #: templates/registration/login.html:6 templates/registration/login.html:11
 #: templates/registration/login.html:38
 msgid "Log in"
-msgstr "登录"
+msgstr ""
 
 #: templates/base.html:53 templates/dn42auth/signup.html:6
 #: templates/dn42auth/signup_auth.html:6 templates/dn42auth/signup_sent.html:6
 #: templates/index.html:15
 msgid "Sign up"
-msgstr "注册"
+msgstr ""
 
 #: templates/base.html:55
 msgid "Log out"
-msgstr "登出"
+msgstr ""
 
 #: templates/base.html:71
 msgid "Contact"
-msgstr "联系"
+msgstr ""
 
 #: templates/base.html:71
 msgid "Source code"
-msgstr "源代码"
+msgstr ""
 
 #: templates/base.html:71
 msgid "Help translate this page"
-msgstr "帮助翻译此页面"
+msgstr ""
 
 #: templates/base.html:71
 msgid "Legal notice"
-msgstr "法律建议"
+msgstr ""
 
 #: templates/dn42auth/signup.html:15
 msgid ""
@@ -298,8 +293,6 @@ msgid ""
 "verify your <em>Maintainer</em> object from the DN42 registry (e.g. "
 "<code>FOOBAR-MNT</code>)."
 msgstr ""
-"如果这是你首次使用自动对等服务，你需要验证你来自DN42注册表的<em>Maintainer</em>对象(例如<code>FOOBAR-"
-"MNT</code>)."
 
 #: templates/dn42auth/signup.html:16
 msgid ""
@@ -335,7 +328,7 @@ msgstr ""
 msgid ""
 "Welcome! This service will allow you to automatically establish and manage "
 "DN42 peerings with AS64719 over Wireguard."
-msgstr "你好，这个门户网站允许你通过Wireguard自动创建和管理与AS64719的DN42对等关系。"
+msgstr ""
 
 #: templates/peeringmanager/peering_detail.html:11
 msgid "BGP state:"
@@ -522,8 +515,8 @@ msgstr ""
 
 #: templates/registration/login.html:24
 msgid "Email address"
-msgstr "电子邮件地址"
+msgstr ""
 
 #: templates/registration/login.html:34
 msgid "Password"
-msgstr "密码"
+msgstr ""
