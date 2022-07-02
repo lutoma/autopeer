@@ -6,13 +6,13 @@ authors = ["Lukas Martini <hello@lutoma.org>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Django = "4.0.2"
+Django = "4.0.4"
 requests = "2.27.1"
 rrdtool = "^0.1.15"
 "hurry.filesize" = "0.9"
 django-bootstrap-v5 = "^1.0.8"
 pystmark = { git = "https://github.com/xsleonard/pystmark.git", rev = "300710d48c8f5078071fb9586c9af73837bd6230" }
-PyJWT = "^2.3.0"
+PyJWT = "^2.4.0"
 fabric = "^2.6.0"
 django-loginas = "^0.3.10"
 
