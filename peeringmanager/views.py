@@ -125,6 +125,7 @@ class PeeringMixin:
 		form.instance.router.wg_last_port += 1
 		form.instance.wg_port = form.instance.router.wg_last_port
 		form.instance.router.save()
+		form.instance.mntner = form.instance.owner.dn42_mntner
 
 		fields = ['id', 'asn', 'endpoint', 'endpoint_internal_v4', 'endpoint_internal_v6',
 			'router_endpoint_internal_v6', 'mbgp_enabled', 'bandwidth_community', 'wg_privkey',
