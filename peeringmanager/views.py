@@ -137,8 +137,14 @@ class PeeringMixin:
 		ssh_host = form.instance.router.host_external
 		print(f'Connecting to {ssh_host} to update peering #{form.instance.id}')
 
-		with fabric.Connection(ssh_host, user='autopeer', connect_timeout=5) as conn:
-			conn.run('/usr/bin/sudo /usr/local/bin/autopeer-update', in_stream=data_stream)
+		try:
+			with fabric.Connection(ssh_host, user='autopeer', connect_timeout=5) as conn:
+				conn.run('/usr/bin/sudo /usr/local/bin/autopeer-update', in_stream=data_stream)
+		except Exception as e:
+			form.add_error('router', 'Could not deploy peering on the router. Perhaps it is '
+				'currently offline or otherwise unreachable. Please try again later or ping lutoma '
+				f' if the problem persists ({e})')
+			return super().form_invalid(form)
 
 		return super().form_valid(form)
 
