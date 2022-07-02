@@ -23,7 +23,11 @@ def whois_query(obj):
 		if not line or line.startswith('%'):
 			continue
 
-		key, value = line.split(':', maxsplit=1)
+		try:
+			key, value = line.split(':', maxsplit=1)
+		except ValueError:
+			continue
+
 		key = key.strip()
 		value = value.strip()
 
