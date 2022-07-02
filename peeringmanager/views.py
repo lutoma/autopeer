@@ -126,8 +126,9 @@ class PeeringMixin:
 		form.instance.wg_port = form.instance.router.wg_last_port
 		form.instance.router.save()
 
-		fields = ['id', 'asn', 'endpoint', 'endpoint_internal_v4', 'endpoint_internal_v6', 'mbgp_enabled',
-			'bandwidth_community', 'wg_privkey', 'wg_peer_pubkey', 'wg_port', 'name']
+		fields = ['id', 'asn', 'endpoint', 'endpoint_internal_v4', 'endpoint_internal_v6',
+			'router_endpoint_internal_v6', 'mbgp_enabled', 'bandwidth_community', 'wg_privkey',
+			'wg_peer_pubkey', 'wg_port', 'name']
 
 		data = dict(map(lambda c: (c, getattr(form.instance, c)), fields))
 		data['router_endpoint_internal_v4'] = form.instance.router.ip_internal

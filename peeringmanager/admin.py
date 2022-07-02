@@ -11,6 +11,6 @@ class RouterAdmin(admin.ModelAdmin):
 @admin.register(Peering)
 class PeeringAdmin(admin.ModelAdmin):
 	list_display = ['asn', 'router', 'vpn_type', 'endpoint', 'endpoint_internal_v4',
-		'endpoint_internal_v6', 'mbgp_enabled']
+		'endpoint_internal_v6', 'router_endpoint_internal_v6', 'mbgp_enabled']
 
 	list_filter = ['router', 'vpn_type']

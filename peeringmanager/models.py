@@ -1,5 +1,5 @@
 from django.utils.translation import gettext_lazy as _
-from dn42auth.models import DN42User
+from django.contrib.auth import get_user_model
 from hurry.filesize import size
 from django.db import models
 import rrdtool
@@ -39,7 +39,7 @@ class Peering(models.Model):
 		('wireguard', _('Wireguard')),
 	)
 
-	owner = models.ForeignKey(DN42User, verbose_name=_('Owner'),
+	owner = models.ForeignKey(get_user_model(), verbose_name=_('Owner'),
 		on_delete=models.SET_NULL, null=True, blank=True)
 
 	mntner = models.CharField(_('Maintainer object'), max_length=200)
@@ -61,6 +61,10 @@ class Peering(models.Model):
 	endpoint_internal_v6 = models.GenericIPAddressField(protocol='IPv6', blank=True, null=True,
 		verbose_name=_('Link-local IPv6 address'),
 		help_text=_('Link-local IPv6 address of your router'))
+
+	router_endpoint_internal_v6 = models.GenericIPAddressField(protocol='IPv6', blank=True, null=True,
+		default='fe80::acab', verbose_name=_('Link-local IPv6 address router'),
+		help_text=_('Link-local IPv6 address of my router'))
 
 	mbgp_enabled = models.BooleanField(default=True, verbose_name=_('Multi-protocol BGP over IPv6'),
 		help_text=_('If set, the router will establish a Multi-protocol session for both IPv4 and IPv6 over the IPv6 link-local address (RFC 4760)'))
