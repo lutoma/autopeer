@@ -50,7 +50,7 @@ class PeeringForm(forms.ModelForm):
 			self.fields['name'].disabled = True
 
 	def clean_name(self):
-		if not re.match(r'^[a-zA-Z0-9]+$', self.cleaned_data['name']):
+		if not re.match(r'^[a-zA-Z][a-zA-Z0-9]*$', self.cleaned_data['name']):
 			raise ValidationError(_('Name contains illegal characters'))
 		return self.cleaned_data['name'].lower()
 

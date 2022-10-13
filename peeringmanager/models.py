@@ -75,7 +75,13 @@ class Peering(models.Model):
 		help_text=_('Used to set <a href="https://dn42.eu/howto/Bird-communities">BGP communities</a>'))
 
 	name = models.CharField(max_length=12, verbose_name=_('Peering name'),
-		help_text=_('A human-readable name for this peering. Usually your nickname or a network name. Used for the Wireguard interface name, in the looking glass, and similar places. Lowercase ASCII only, max. 12 chars.'))
+		help_text=_(
+			'A human-readable name for this peering. Usually your nickname or a network name. '
+			'Used for the Wireguard interface name, in the looking glass, and similar places. '
+			'Lowercase ASCII only, max. 12 chars, needs to start with a non-number. <br><br>'
+			'<strong>The point of this name is to make it easier to identify peerings in '
+			'command outputs for _me_ , so please don\'t use generic names like "home", "router" '
+			'or "lutomanyc".</strong>'))
 
 	wg_privkey = models.CharField(max_length=150, verbose_name=_('Wireguard private key'))
 	wg_pubkey = models.CharField(max_length=150, verbose_name=_('Wireguard public key'))
