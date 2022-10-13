@@ -6,7 +6,7 @@ authors = ["Lukas Martini <hello@lutoma.org>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Django = "4.0.4"
+Django = "4.1.2"
 requests = "2.27.1"
 rrdtool = "^0.1.15"
 "hurry.filesize" = "0.9"
