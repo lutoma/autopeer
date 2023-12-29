@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView
 from django.utils.decorators import method_decorator
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from autopeer.mixins import AuthenticatedRedirectMixin
@@ -111,6 +112,8 @@ class PeeringMixin:
 		return kwargs
 
 	def form_valid(self, form):
+		form.instance.active = True
+		form.instance.last_up = timezone.now()
 		form.instance.owner = self.request.user
 
 		if not form.instance.wg_privkey or not form.instance.wg_pubkey:

@@ -39,6 +39,9 @@ class Peering(models.Model):
 		('wireguard', _('Wireguard')),
 	)
 
+	active = models.BooleanField(default=True, verbose_name=_('Active'))
+	last_up = models.DateTimeField(auto_now_add=True, verbose_name=_('Last seen up'))
+
 	owner = models.ForeignKey(get_user_model(), verbose_name=_('Owner'),
 		on_delete=models.SET_NULL, null=True, blank=True)
 
