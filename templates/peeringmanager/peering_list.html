@@ -6,7 +6,7 @@
 	<div class='col-lg-12 d-flex justify-content-between'>
 		<h1>Peerings</h1>
 		<div>
-			<a href='/peerings/new/' class='btn btn-primary'><i class="fa-regular fa-plus"></i> {% trans 'Create peering' %}</a>
+			<a href='{% url "peerings-new" %}' class='btn btn-primary'><i class="fa-regular fa-plus"></i> {% trans 'Create peering' %}</a>
 		</div>
 	</div>
 
@@ -28,14 +28,18 @@
 				{% for peering in object_list %}
 					<tr>
 						{% with status=peering.get_status %}
-						<th scope='row'><a href='/peerings/{{peering.id}}/'>{{ peering.asn }}</a></th>
+						<th scope='row'><a href='{% url "peerings-detail" peering.id %}'>{{ peering.asn }}</a></th>
 						<td>
-							{% if status.state == 'Established' %}
-								<span class='badge bg-success'>{{ status.state }}</span>
+							{% if peering.active %}
+								{% if status.state == 'Established' %}
+									<span class='badge bg-success'>{{ status.state }}</span>
+								{% else %}
+									<span class='badge bg-warning'>{{ status.state }}</span>
+								{% endif %}
+									<br><small>{% trans 'since' %} {{ status.state_since }}</small>
 							{% else %}
-								<span class='badge bg-warning'>{{ status.state }}</span>
+									<span class='badge bg-warning'>{% trans 'Disabled' %}</span>
 							{% endif %}
-								<br><small>{% trans 'since' %} {{ status.state_since }}</small>
 						</td>
 						<td>
 							{{ peering.router.flag_emoji }} {{ peering.router.location }}<br />
@@ -75,7 +79,7 @@
 							{% endwith %}
 						</td>
 						<td>
-							<a class='btn btn-secondary' href='/peerings/{{ peering.id }}/'><i class="fa-regular fa-circle-info"></i> {% trans 'Details' %}</a>
+							<a class='btn btn-secondary' href='{% url "peerings-detail" peering.id %}'><i class="fa-regular fa-circle-info"></i> {% trans 'Details' %}</a>
 						</td>
 					</tr>
 				{% endfor %}
@@ -83,7 +87,7 @@
 		</table>
 
 		{% if not object_list %}
-			<p>{% trans "You don't seem to have any peerings." %} <a href='/peerings/new/'>{% trans 'Create one!' %}</a></p>
+			<p>{% trans "You don't seem to have any peerings." %} <a href='{% url "peerings-new" %}'>{% trans 'Create one!' %}</a></p>
 		{% endif %}
 	</div>
 </div>
