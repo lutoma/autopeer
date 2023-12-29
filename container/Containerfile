@@ -1,4 +1,4 @@
-FROM python:3.10.2-slim-bullseye
+FROM python:3.12.1-slim-bookworm
 LABEL maintainer="hello@lutoma.org"
 ENV PYTHONUNBUFFERED 1
 ARG FONTAWESOME_AUTH_TOKEN

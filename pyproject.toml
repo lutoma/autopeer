@@ -5,16 +5,18 @@ description = ""
 authors = ["Lukas Martini <hello@lutoma.org>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-Django = "4.1.2"
-requests = "2.27.1"
-rrdtool = "^0.1.15"
+python = "^3.12"
+Django = "^4.2.0"
+requests = "2.31.0"
+rrdtool = "^0.1.16"
 "hurry.filesize" = "0.9"
-django-bootstrap-v5 = "^1.0.8"
+django-bootstrap-v5 = "^1.0.11"
 pystmark = { git = "https://github.com/xsleonard/pystmark.git", rev = "300710d48c8f5078071fb9586c9af73837bd6230" }
 PyJWT = "^2.4.0"
-fabric = "^2.6.0"
-django-loginas = "^0.3.10"
+fabric = "^3.2.2"
+django-loginas = "^0.3.11"
+lexicon = "^2.0.1"
+pyyaml = "^6.0.1"
 
 [tool.poetry.dev-dependencies]
 
