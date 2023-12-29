@@ -40,4 +40,4 @@ RUN rm -f autopeer/settings_local.py && \
   ln -s /data/ssh $HOME/.ssh
 
 HEALTHCHECK CMD curl --fail --unix-socket /run/gunicorn.sock http://localhost || exit 1
-CMD ["/usr/bin/supervisord", "-c", "/app/docker/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/app/container/supervisord.conf"]
